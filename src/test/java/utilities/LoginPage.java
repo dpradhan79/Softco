@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,9 +26,14 @@ public class LoginPage{
 		//Open browser
 		driver = new ChromeDriver();
 		
+		//Configuring implicit wait of 20 sec through out script
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
 		//open application
     	driver.get(URL);
-    	Thread.sleep(10000);
+    	
+    	//maximize the browser
+    	driver.manage().window().maximize();
     	
     	//instructed to wait for 180 sec for the visibility of element
     	WebDriverWait wait = new WebDriverWait(driver, 180);
@@ -49,6 +56,7 @@ public class LoginPage{
     	
     	//Click on login button
     	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LoginButton"))).click();
+    	Thread.sleep(3000);
     	
     	//Validating is application logged in or not
     	Assert.assertEquals(true, driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ModuleIcon"))).isDisplayed());
