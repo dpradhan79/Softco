@@ -12,6 +12,8 @@ import com.testdata.excel.TestDataReader;
 import com.utilities.GeneralMethods;
 import com.utilities.GlobalConstants;
 
+import utilities.GlobalSearchPage;
+import utilities.HomePage;
 import utilities.LoginPage;
 
 public class TC001ReadOnly {
@@ -23,7 +25,7 @@ public class TC001ReadOnly {
 
     public GeneralMethods objGeneralFunc = new GeneralMethods();
     TestDataReader objTestDataReader = new TestDataReader();
-    LoginPage application = new LoginPage();
+    GlobalSearchPage application = new GlobalSearchPage();
 
     /**
      * This method is used to get the configuration as well as test case specific details from the test data
@@ -48,18 +50,16 @@ public class TC001ReadOnly {
     }
 
     @Test
-    public void testloginpat()
+    public void testloginpat() throws InterruptedException
     {
-        try
-        {
-        	System.out.println(objConfigData.get("SoftCo_URL"));
-        	System.out.println(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "UserName"));
-        	application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
-        }
-
-        catch(Exception e)
-        {
-        	//objReporting.logFailure(false, "Exception in Test Log in pat:" + e.getCause().toString());
-        }    
+    	//Login to application 
+    	application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
+    	
+    	//Navigate to Search for a document 
+    	application.navigateToSearchForADocument();
+    	
+    	//Click on search for the document and click on first record available 
+    	application.searchForADocumentAndClickOnFirstRecord();
+    
     }
 }
