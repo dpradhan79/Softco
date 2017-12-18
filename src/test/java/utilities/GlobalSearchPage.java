@@ -11,7 +11,7 @@ public class GlobalSearchPage extends HomePage{
 	
 	HomePage obj = new HomePage();
 	
-	public void searchForADocumentAndClickOnFirstRecord() throws InterruptedException
+	public int searchForADocumentAndClickOnFirstRecord() throws InterruptedException
 	{
 		//Click on Search button
 		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "SearchForDoc_SearchButton"))).click();
@@ -20,8 +20,17 @@ public class GlobalSearchPage extends HomePage{
 		//Get all the records displayed in results table
 		List<WebElement> results = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "rowsInResultsTable")));
 		
+		//Check results count
+		int resultsCount = results.size();
+		
+		//validate results count and click on first record if records displayed
+		if(resultsCount==0)
+			System.out.println("No records displayed in search results");
+		else
 		//click on the first record displayed
-		results.get(1).click();
+			results.get(1).click();
+		
+		return resultsCount;
 	}
 
 }
