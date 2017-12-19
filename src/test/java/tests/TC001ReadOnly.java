@@ -2,8 +2,8 @@ package tests;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -12,9 +12,7 @@ import com.testdata.excel.TestDataReader;
 import com.utilities.GeneralMethods;
 import com.utilities.GlobalConstants;
 
-import utilities.GlobalSearchPage;
-import utilities.HomePage;
-import utilities.LoginPage;
+import utilities.Invoice;
 
 public class TC001ReadOnly {
 
@@ -22,10 +20,11 @@ public class TC001ReadOnly {
     public Map<String, Map<String, String>> objHostsDetails = null;
     public Map<String, String> objTestData = null;
     boolean bStatus;
+    WebDriver driver;
 
     public GeneralMethods objGeneralFunc = new GeneralMethods();
     TestDataReader objTestDataReader = new TestDataReader();
-    GlobalSearchPage application = new GlobalSearchPage();
+    Invoice application = new Invoice();
 
     /**
      * This method is used to get the configuration as well as test case specific details from the test data
@@ -50,16 +49,66 @@ public class TC001ReadOnly {
     }
 
     @Test
-    public void testloginpat() throws InterruptedException
+    public void tc001() throws Exception
     {
+    	objTestData = application.testDataReader("tc001ReadOnlyValidatons");
+    	System.out.println(objTestData.get("Option 2"));
+    	
     	//Login to application 
-    	application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
+    	driver = application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
     	
     	//Navigate to Search for a document 
     	application.navigateToSearchForADocument();
     	
     	//Click on search for the document and click on first record available 
-    	application.searchForADocumentAndClickOnFirstRecord();
-    
+    	application.searchAndClickOnFirstRecord();
+    	
+    	//Verify Add button not displayed
+    	application.addButtonViibility("false");
+    	
+    	//Validate email pop-up is displayed
+    	application.emaiTemplateValidation();
+    	
+    	//Validate all the input fields in header are disabled
+    	application.validateAllInputFieldsDiableInHeader();
+    	
+    	//Click on invoices
+    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "Invoices"))).click();
+    	
+    	//Navigate to search for invoices
+    	application.navigateToSearchForInvoice();
+    	
+    	//Search and select 1st record displayed
+    	application.searchAndClickOnFirstRecord();
+    	
+    	//Verify Add button not displayed
+    	application.addButtonViibility("false");
+    	
+    	//Validate email pop-up is displayed
+    	application.emaiTemplateValidation();
+    	
+    	//Validate all the input fields in header are disabled
+    	application.validateAllInputFieldsDiableInHeader();
+    	
+    	//Click on invoices
+    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "Invoices"))).click();
+    	
+    	//Navigate to search for invoices
+    	application.navigateToSearchForTimeSheet();
+    	
+    	//Search and select 1st record displayed
+    	application.searchAndClickOnFirstRecord();
+    	
+    	//Verify Add button not displayed
+    	application.addButtonViibility("false");
+    	
+    	//Validate email pop-up is displayed
+    	application.emaiTemplateValidation();
+    	
+    	//Validate all the input fields in header are disabled
+    	application.validateAllInputFieldsDiableInHeader();
+    	
+    	//Close browser
+    	driver.close();
     }
 }
