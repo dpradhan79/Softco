@@ -11,11 +11,11 @@ import com.config.ControlFileDefinition;
 
 import junit.framework.Assert;
 
-public class Invoice extends GlobalSearchPage{
+public class InvoicePage extends GlobalSearchPage{
 	
 	GlobalSearchPage obj = new GlobalSearchPage();
 	
-	public void emaiTemplateValidation()
+	public void emailTemplateValidation()
 	{
 		//Wait until options menu is clickable
 		WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -72,5 +72,36 @@ public class Invoice extends GlobalSearchPage{
     		else
     			throw new Exception("Input field "+i+" is not diabled"); 
     	}
+	}
+	
+	public void validateAddCommentButtonDisplayed()
+	{
+		//click on comment icon
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CommentIcon"))).click();;
+		
+		//wait until Add Comment button is displayed
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "AddCommentButton"))));
+		
+		//Close pop-up
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CommentpopupCloseIcon"))).click();;
+	}
+	
+	public void validateCRUDOptionsOfSelectedRow()
+	{
+		//Wait till drop down displayed
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CaseRowOptionsDD"))));
+		
+		//Click on menu
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CaseRowOptionsDD"))).click();
+		
+		//validate options available in Drop-down
+		List<WebElement> options = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "optionsAvailableInDD")));
+		
+		for(int i=0;i<options.size();i++)
+		{
+			System.out.println(options.get(i).getText());
+		}
 	}
 }

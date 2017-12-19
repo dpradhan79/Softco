@@ -5,7 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -75,6 +77,20 @@ public class LoginPage{
     	Assert.assertEquals(true, driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ModuleIcon"))).isDisplayed());
     	
     	return driver;
+	}
+	
+	public void dragAndDrop(String drag, String drop) throws InterruptedException
+	{
+		Thread.sleep(3000);
+		//Read and store drag location
+    	WebElement element = driver.findElement(By.xpath(drag));
+    	
+    	//read and store drop location
+    	WebElement target = driver.findElement(By.xpath(drop));
+    	
+    	//drag and drop
+    	(new Actions(driver)).dragAndDrop(element, target).perform();
+    	Thread.sleep(3000);
 	}
 
 }

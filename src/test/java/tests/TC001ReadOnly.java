@@ -12,7 +12,7 @@ import com.testdata.excel.TestDataReader;
 import com.utilities.GeneralMethods;
 import com.utilities.GlobalConstants;
 
-import utilities.Invoice;
+import utilities.InvoicePage;
 
 public class TC001ReadOnly {
 
@@ -24,7 +24,7 @@ public class TC001ReadOnly {
 
     public GeneralMethods objGeneralFunc = new GeneralMethods();
     TestDataReader objTestDataReader = new TestDataReader();
-    Invoice application = new Invoice();
+    InvoicePage application = new InvoicePage();
 
     /**
      * This method is used to get the configuration as well as test case specific details from the test data
@@ -64,10 +64,10 @@ public class TC001ReadOnly {
     	application.searchAndClickOnFirstRecord();
     	
     	//Verify Add button not displayed
-    	application.addButtonViibility("false");
+    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
     	
     	//Validate email pop-up is displayed
-    	application.emaiTemplateValidation();
+    	application.emailTemplateValidation();
     	
     	//Validate all the input fields in header are disabled
     	application.validateAllInputFieldsDiableInHeader();
@@ -82,10 +82,10 @@ public class TC001ReadOnly {
     	application.searchAndClickOnFirstRecord();
     	
     	//Verify Add button not displayed
-    	application.addButtonViibility("false");
+    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
     	
     	//Validate email pop-up is displayed
-    	application.emaiTemplateValidation();
+    	application.emailTemplateValidation();
     	
     	//Validate all the input fields in header are disabled
     	application.validateAllInputFieldsDiableInHeader();
@@ -100,10 +100,10 @@ public class TC001ReadOnly {
     	application.searchAndClickOnFirstRecord();
     	
     	//Verify Add button not displayed
-    	application.addButtonViibility("false");
+    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
     	
     	//Validate email pop-up is displayed
-    	application.emaiTemplateValidation();
+    	application.emailTemplateValidation();
     	
     	//Validate all the input fields in header are disabled
     	application.validateAllInputFieldsDiableInHeader();
