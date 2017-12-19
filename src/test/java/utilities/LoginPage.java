@@ -1,5 +1,6 @@
 package utilities;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,15 +11,27 @@ import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.config.ControlFileDefinition;
+import com.testdata.excel.TestDataReader;
 import com.utilities.GeneralMethods;
+import com.utilities.GlobalConstants;
 
 import junit.framework.Assert;
 
 public class LoginPage{
 	public GeneralMethods objGeneralFunc = new GeneralMethods();
+	TestDataReader objTestDataReader = new TestDataReader();
+	public Map<String, String> TestData = null;
 	public WebDriver driver;
 	
-	public void login(String URL, String userName, String password) throws InterruptedException
+	public Map<String, String> testDataReader(String scriptName)
+	{
+		GlobalConstants.sScriptName = scriptName;
+		TestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
+	      		GlobalConstants.sScriptName);
+		return TestData;
+	}
+	
+	public WebDriver login(String URL, String userName, String password) throws InterruptedException
 	{
 		//Read chrome driver from location
 		System.setProperty("webdriver.chrome.driver",objGeneralFunc.getConfigProperty("chromeDriverPath"));
@@ -60,6 +73,8 @@ public class LoginPage{
     	
     	//Validating is application logged in or not
     	Assert.assertEquals(true, driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ModuleIcon"))).isDisplayed());
+    	
+    	return driver;
 	}
 
 }

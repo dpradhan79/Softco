@@ -2,6 +2,8 @@ package utilities;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.config.ControlFileDefinition;
 
@@ -129,4 +131,126 @@ public class HomePage extends LoginPage {
 			//Returning the status
 			return status;
 	}
+	
+	public void expandARInvoice() throws InterruptedException
+	{
+		Thread.sleep(5000);
+		boolean status = false;
+		
+		//Storing ARInvoice to ARInvoiceExpand_CollapseIcon
+		WebElement ARInvoiceExpand_CollapseIcon = driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARInvoiceExpand/CollapseICon")));
+		
+		//Reading class name of ARInvoice and storing to String type
+		String className = ARInvoiceExpand_CollapseIcon.getAttribute("class");
+		
+		//Validating whether the ICON is in expand / collapse status 
+			if(className.contains("closed"))
+				status = false;	
+			else if(className.contains("open"))
+				status = true;
+			
+			if(status){
+				System.out.println("ARInvoiceIcon is expanded");}
+			else{
+				driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARInvoiceExpand/CollapseICon"))).click();
+			Thread.sleep(3000);}
+	}
+	
+	public void expandARProcessingQueue() throws InterruptedException
+	{
+		boolean status = false;
+		
+		//Storing ARProcessing queue to ARProcessingQueueExpand_CollapseIcon
+		WebElement ARProcessingQueueExpand_CollapseIcon = driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARProcessingQueueExpand/CollapseICon")));
+		
+		//Reading class name of ARProcessing queue and storing to String type
+		String className = ARProcessingQueueExpand_CollapseIcon.getAttribute("class");
+		
+		//Validating whether the ICON is in expand / collapse status 
+			if(className.contains("closed"))
+				status = false;	
+			else if(className.contains("open"))
+				status = true;
+
+			if(status){
+				System.out.println("ARProcessingQueueIcon is expanded");}
+			else{
+				driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARProcessingQueueExpand/CollapseICon"))).click();
+			Thread.sleep(3000);}
+	}
+	
+	public void navigateToMissingClient() throws InterruptedException
+	{
+		//Expand ARInvoce link
+		expandARInvoice();
+		
+		//Expand AR processing queue link
+		expandARProcessingQueue();
+		
+		//Click on missing client link
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "MissingClientLink"))).click();
+		Thread.sleep(3000);
+	}
+	
+	/**
+	 * Verifies and returns expand/collapse icon status of ARGlobal Search
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	public void expandARGlobalSearch() throws InterruptedException
+	{
+		boolean status = false;
+		
+		//Storing ARGlobal Search to ARGlobalSearch_CollapseIcon
+		WebElement ARGlobalSearch_CollapseIcon = driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARGlobalSearchExpand/CollapseICon")));
+		
+		//Reading class name of ARGlobal Search and storing to String type
+		String className = ARGlobalSearch_CollapseIcon.getAttribute("class");
+		
+		//Validating whether the ICON is in expand / collapse status 
+			if(className.contains("closed"))
+				status = false;	
+			else if(className.contains("open"))
+				status = true;
+			
+			if(status){
+				System.out.println("ARGlobal Search is expanded");}
+			else{
+				driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARGlobalSearchExpand/CollapseICon"))).click();
+			Thread.sleep(3000);}
+	}
+	
+	public void navigateToSearchForInvoice() throws InterruptedException
+	{
+		//Expand ARInvoce link
+		expandARInvoice();
+		
+		//Expand AR processing queue link
+		expandARProcessingQueue();
+		
+		//Expand AR Global Search
+		expandARGlobalSearch();
+		
+		//Click on missing client link
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "searchForInvoiceLink"))).click();
+		Thread.sleep(3000);
+	}
+	
+	public void navigateToSearchForTimeSheet() throws InterruptedException
+	{
+		//Expand ARInvoce link
+		expandARInvoice();
+		
+		//Expand AR processing queue link
+		expandARProcessingQueue();
+		
+		//Expand AR Global Search
+		expandARGlobalSearch();
+		
+		//Click on missing client link
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "searchForTimeSheet"))).click();
+		Thread.sleep(3000);
+	}
 }
+
+
