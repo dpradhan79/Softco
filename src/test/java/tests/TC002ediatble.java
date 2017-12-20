@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import com.config.ControlFileDefinition;
 import com.pages.InvoicePage;
-import com.testdata.excel.TestDataReader;
+import com.excel.TestDataReader;
 import com.utilities.FrameworkConstants;
 import com.utilities.GeneralMethods;
 

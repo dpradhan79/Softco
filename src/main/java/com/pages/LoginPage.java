@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.config.ControlFileDefinition;
-import com.testdata.excel.TestDataReader;
+import com.excel.TestDataReader;
 import com.utilities.FrameworkConstants;
 import com.utilities.GeneralMethods;
 
