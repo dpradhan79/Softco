@@ -85,6 +85,10 @@ public class TC002ediatble {
     		WebElement horizontal_scroll = driver.findElement(By.xpath("(//div[contains(@class,'table-header-wrap')])[2]//td["+(i+1)+"]")); 
         	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", horizontal_scroll);
     		System.out.println(headerAvailable.get(i).getText());
+    		
+    		WebElement rowInfo = driver.findElement(By.xpath("//div[contains(@class,'scrollable v-table')]//tr[@class='v-table-row']/td["+(i+1)+"]//input")); 
+        	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rowInfo);
+    		System.out.println(driver.findElement(By.xpath("//div[contains(@class,'scrollable v-table')]//tr[@class='v-table-row']/td["+(i+1)+"]//input")).getAttribute("disabled"));
     	}
     	
     	//read check box web element and store to check box web element obj
