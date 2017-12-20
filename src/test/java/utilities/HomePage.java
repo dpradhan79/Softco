@@ -251,6 +251,17 @@ public class HomePage extends LoginPage {
 		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "searchForTimeSheet"))).click();
 		Thread.sleep(3000);
 	}
+	
+	public void logout()
+	{
+		//Click on logout
+		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LogoutButton"))).click();
+		
+		//wait until application logged out
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LoginButton"))));
+		System.out.println("Application logged out successfully");
+	}
 }
 
 

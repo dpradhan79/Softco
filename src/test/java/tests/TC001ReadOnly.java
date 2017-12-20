@@ -52,7 +52,6 @@ public class TC001ReadOnly {
     public void tc001() throws Exception
     {
     	objTestData = application.testDataReader("tc001ReadOnlyValidatons");
-    	System.out.println(objTestData.get("Option 2"));
     	
     	//Login to application 
     	driver = application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
@@ -107,6 +106,9 @@ public class TC001ReadOnly {
     	
     	//Validate all the input fields in header are disabled
     	application.validateAllInputFieldsDiableInHeader();
+    	
+    	//logout user
+    	application.logout();
     	
     	//Close browser
     	driver.close();

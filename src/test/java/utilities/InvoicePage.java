@@ -47,7 +47,7 @@ public class InvoicePage extends GlobalSearchPage{
 			Assert.assertEquals(1, driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "AddButton"))).size());
 			
 			//Print status
-	    	System.out.println("Add button not displayed");
+	    	System.out.println("Add button displayed");
 		}else{
 			//Validate element is displayed or not
 			Assert.assertEquals(0, driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "AddButton"))).size());
@@ -82,6 +82,7 @@ public class InvoicePage extends GlobalSearchPage{
 		//wait until Add Comment button is displayed
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "AddCommentButton"))));
+		System.out.println("Add comment button displayed");
 		
 		//Close pop-up
 		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CommentpopupCloseIcon"))).click();;
