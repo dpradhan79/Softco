@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.testng.annotations.Test;
+
+import com.utilities.FrameworkConstants;
+import com.utilities.GeneralMethods;
+
 import jxl.Sheet;
 import jxl.Workbook;
-import com.utilities.GeneralMethods;
-import com.utilities.GlobalConstants;
-
-import org.testng.annotations.Test;
 /**
  * Purpose: Retrieves TestData sheet data from Excel
  */
@@ -72,7 +73,7 @@ public class TestData
 		}
 		catch(Exception e)
 		{			
-			GlobalConstants.gErrMsg = "Exception occured.." + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception occured.." + e.getMessage();
 		}
 		return objMap;
 	}

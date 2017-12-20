@@ -8,11 +8,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.config.ControlFileDefinition;
+import com.pages.InvoicePage;
 import com.testdata.excel.TestDataReader;
+import com.utilities.FrameworkConstants;
 import com.utilities.GeneralMethods;
-import com.utilities.GlobalConstants;
 
-import utilities.InvoicePage;
 
 public class TC001ReadOnly {
 
@@ -40,7 +40,7 @@ public class TC001ReadOnly {
 
             // Read test data based on the script name
             objTestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
-            		GlobalConstants.sScriptName);
+            		FrameworkConstants.sScriptName);
         }
         catch (Exception e)
         {   

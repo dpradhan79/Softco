@@ -1,4 +1,4 @@
-package utilities;
+package com.pages;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -9,13 +9,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.config.ControlFileDefinition;
 import com.testdata.excel.TestDataReader;
+import com.utilities.FrameworkConstants;
 import com.utilities.GeneralMethods;
-import com.utilities.GlobalConstants;
 
 import junit.framework.Assert;
 
@@ -27,9 +26,9 @@ public class LoginPage{
 	
 	public Map<String, String> testDataReader(String scriptName)
 	{
-		GlobalConstants.sScriptName = scriptName;
+		FrameworkConstants.sScriptName = scriptName;
 		TestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
-	      		GlobalConstants.sScriptName);
+				FrameworkConstants.sScriptName);
 		return TestData;
 	}
 	

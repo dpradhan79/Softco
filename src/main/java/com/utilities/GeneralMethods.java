@@ -85,7 +85,7 @@ public class GeneralMethods
         }
         catch(Exception e)
         {
-            GlobalConstants.gErrMsg = e.getMessage();
+        	FrameworkConstants.gErrMsg = e.getMessage();
             return "false";
         }
     }
@@ -139,8 +139,8 @@ public class GeneralMethods
         
         catch(Exception e)
         {
-            GlobalConstants.gErrMsg = e.getMessage().toString();
-            System.out.println("Error Exception occured while trying to get XPath for the element:" + GlobalConstants.gErrMsg);
+        	FrameworkConstants.gErrMsg = e.getMessage().toString();
+            System.out.println("Error Exception occured while trying to get XPath for the element:" + FrameworkConstants.gErrMsg);
           
         }
 	    return false;
@@ -164,7 +164,7 @@ public class GeneralMethods
             bExists = newfile.exists();
             if(!bExists)
             {
-                GlobalConstants.gErrMsg = "Properties file not displayed in the given path:" + newfile.getAbsolutePath();
+            	FrameworkConstants.gErrMsg = "Properties file not displayed in the given path:" + newfile.getAbsolutePath();
                               return "-1";
             } 
 
@@ -178,8 +178,8 @@ public class GeneralMethods
         }
         catch(Exception e)
         {
-            GlobalConstants.gErrMsg = e.getMessage().toString();
-            System.out.println("Error Exception occured while trying to get XPath for the element:" + sElementKey + " from file:" + sPropertiesFileName + "\n " + GlobalConstants.gErrMsg);
+        	FrameworkConstants.gErrMsg = e.getMessage().toString();
+            System.out.println("Error Exception occured while trying to get XPath for the element:" + sElementKey + " from file:" + sPropertiesFileName + "\n " + FrameworkConstants.gErrMsg);
             return "-1";
         }
     }

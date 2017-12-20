@@ -1,4 +1,4 @@
-package utilities;
+package com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

@@ -5,10 +5,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.utilities.FrameworkConstants;
+import com.utilities.GeneralMethods;
+
 import jxl.Sheet;
 import jxl.Workbook;
-import com.utilities.GeneralMethods;
-import com.utilities.GlobalConstants;
 /**
  * Purpose: Retrives data from Excel
  */
@@ -44,7 +45,7 @@ public class CommonMethods
 		}
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = "Exception occured while reading test data:" + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception occured while reading test data:" + e.getMessage();
 			return -1;
 		}
 	}
@@ -75,11 +76,11 @@ public class CommonMethods
 		}
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = (new StringBuilder("Exception occured:")).append(e.getMessage()).toString();
+			FrameworkConstants.gErrMsg = (new StringBuilder("Exception occured:")).append(e.getMessage()).toString();
 			return iColumnNo;
 		}
 		if(iColumnNo == 0)
-			GlobalConstants.gErrMsg = (new StringBuilder("No column with name ")).append(sColumnName).append(" in sheet ").append(sSheetName).append(" at row number ").append(iRowNo).toString();
+			FrameworkConstants.gErrMsg = (new StringBuilder("No column with name ")).append(sColumnName).append(" in sheet ").append(sSheetName).append(" at row number ").append(iRowNo).toString();
 		return iColumnNo;
 	}
 	/**
@@ -106,7 +107,7 @@ public class CommonMethods
 
 			if (!(iRowNo <= iRowCount))
 			{
-				GlobalConstants.gErrMsg = "No data in " + ((File) objSheet).getName().toString() + " at row:" + iRowNo;
+				FrameworkConstants.gErrMsg = "No data in " + ((File) objSheet).getName().toString() + " at row:" + iRowNo;
 				return objRowData;
 			}
 			for(int iColCounter = 0;iColCounter<iColCount;iColCounter++)
@@ -127,7 +128,7 @@ public class CommonMethods
 
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = "Exception Occured:" + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception Occured:" + e.getMessage();
 		}
 
 		return objRowData;
@@ -178,7 +179,7 @@ public class CommonMethods
 		}
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = "Exception Occured.!!" + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception Occured.!!" + e.getMessage();
 			return 0;
 		}
 		return iRowCount;
@@ -212,10 +213,10 @@ public class CommonMethods
 		}
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = "Exception Occured.!!" + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception Occured.!!" + e.getMessage();
 			return 0;
 		}
-		if(iRowNo < 0) GlobalConstants.gErrMsg = (new StringBuilder("No row with value ")).append(sRowValue).append(" in sheet ").append(sSheetName).append(" at column number ").append(iColumnNo).toString();
+		if(iRowNo < 0) FrameworkConstants.gErrMsg = (new StringBuilder("No row with value ")).append(sRowValue).append(" in sheet ").append(sSheetName).append(" at column number ").append(iColumnNo).toString();
 
 		return iRowNo;
 	}

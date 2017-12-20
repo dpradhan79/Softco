@@ -4,10 +4,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.utilities.FrameworkConstants;
+import com.utilities.GeneralMethods;
+
 import jxl.Sheet;
 import jxl.Workbook;
-import com.utilities.GeneralMethods;
-import com.utilities.GlobalConstants;
 /**
  * Purpose: Retrieves config sheet data from Excel
  */
@@ -48,7 +49,7 @@ public class Configs
 		}
 		catch(Exception e)
 		{
-			GlobalConstants.gErrMsg = "Exception occured while reading config data:" + e.getMessage();
+			FrameworkConstants.gErrMsg = "Exception occured while reading config data:" + e.getMessage();
 			return null;
 		}
 	}
