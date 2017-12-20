@@ -53,38 +53,4 @@ public class Configs
 			return null;
 		}
 	}
-	/**
-	 * Purpose: Get browser assigned from Hosts sheet
-	 * @param sIPAddress
-	 * @return String[]
-	 */
-	public String[] getBrowsersAssignedFromConfigSheetInExcel(String sIPAddress)
-	{
-		int iLoopCounter = 0;
-		try
-		{
-			//Read data from config sheet
-			Workbook objWorkbook = Workbook.getWorkbook(new File(objGeneralFunc.getConfigProperty("TestDataFilePath")));
-			Sheet objSheet = objWorkbook.getSheet("Hosts");
-			int iRowCount = objSheet.getRows();
-			String browsers[] = new String[iRowCount-1];
-			for(int iRowCounter=1;iRowCounter<iRowCount;iRowCounter++)
-			{
-				String sCurrentIPAddress = ((Sheet) objSheet).getCell(1,iRowCounter).getContents();
-				if(sCurrentIPAddress.equals(sIPAddress))
-				{
-					//get BrowserName
-					browsers[iLoopCounter] = ((Sheet) objSheet).getCell(2,iRowCounter).getContents();
-					browsers[iLoopCounter] = browsers[iLoopCounter] + ".exe";
-					iLoopCounter = iLoopCounter + 1;
-				}
-			}
-			return browsers;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-	}
-
 }

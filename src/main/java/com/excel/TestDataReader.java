@@ -81,17 +81,6 @@ public class TestDataReader
 		
 	}
 
-	
-	/**
-	 * Purpose: Get browser assigned from Hosts sheet
-	 * @param sIPAddress
-	 * @return String[]
-	 */
-	public String[] getBrowsersAssignedFromConfigSheetInExcel(String sIPAddress)
-	{
-		String browsers[]=Tdata.getBrowsersAssignedFromConfigSheetInExcel(sIPAddress);
-		return browsers;
-	}
 
 	/**
 	 * Purpose: Get column number from excel
@@ -145,17 +134,6 @@ public class TestDataReader
 	{
 		int iRowNo=info.getRowNoFromExcel(sTestDataFile, sSheetName, iColumnNo, sRowValue);
 		return iRowNo;
-	}
-	
-	/**
-	 * Purpose: Gets configuration values from Excel
-	 * @param sVariableName
-	 * @return boolean
-	 */
-	public boolean getConfigurationFlags(String sVariableName)
-	{
-		boolean varFlag=info.getConfigurationFlags(sVariableName);
-		return varFlag;
 	}
 }
 

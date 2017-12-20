@@ -220,42 +220,4 @@ public class CommonMethods
 
 		return iRowNo;
 	}
-	/**
-	 * Purpose: Gets configuration values from Excel
-	 * @param sVariableName
-	 * @return boolean
-	 */
-	public boolean getConfigurationFlags(String sVariableName)
-	{
-		boolean varFlag = false;
-		try
-		{
-			if (sVariableName.length() != 0)
-			{
-				String sVariableValue = "";
-				String sFilePath = objGeneralFunc.getConfigProperty("TestDataFilePath");
-				String sSheetName = "Config";
-				Workbook objWorkbook = Workbook.getWorkbook(new File(sFilePath));
-				Sheet objSheet = objWorkbook.getSheet(sSheetName);
-	
-				int iRowCount = objSheet.getRows();
-				for(int iRowCounter = 1;iRowCounter<iRowCount;iRowCounter++)
-				{
-					if((objSheet.getCell(0,iRowCounter).getContents().equalsIgnoreCase(sVariableName)))
-					{
-						sVariableValue = objSheet.getCell(1,iRowCounter).getContents();
-						if (sVariableValue.equalsIgnoreCase("yes"))
-							return true;
-					}
-				}
-			}
-			else
-				return varFlag;
-		}
-		catch(Exception e)
-		{
-			System.out.println("INFO Exception occured while trying to get the value for the constant variable:" + sVariableName + "\n" + e.getMessage());
-		}
-		return false;
-	}
 }
