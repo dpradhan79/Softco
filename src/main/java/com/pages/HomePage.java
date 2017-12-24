@@ -1,5 +1,6 @@
 package com.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,10 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.config.ControlFileDefinition;
 
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 
 public class HomePage extends LoginPage {
 
+	private static final Logger LOG = Logger.getLogger(HomePage.class);
 	LoginPage obj = new LoginPage();
 	
 	/**
@@ -21,11 +22,15 @@ public class HomePage extends LoginPage {
 	public void navigateToSearchForADocument() throws InterruptedException
 	{
 		//Read the status if ARInvoice expand icon
-		boolean ARInvoiceIconStatus = expandStatusOfARInoice();
+		boolean ARInvoiceIconStatus = expandStatusOfARInvoice();
 		System.out.println(ARInvoiceIconStatus);
+	    LOG.info(String.format("ARInvoiceIconStatus = %s", ARInvoiceIconStatus));
 		//Validate if ARInvoiceIcon status and click on icon if it is not expanded
 		if(ARInvoiceIconStatus)
+		{
 			System.out.println("ARInvoiceIcon is expanded");
+			LOG.info("ARInvoiceIcon is expanded");
+		}
 		else
 			driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARInvoiceExpand/CollapseICon"))).click();
 		Thread.sleep(3000);
@@ -64,7 +69,7 @@ public class HomePage extends LoginPage {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public boolean expandStatusOfARInoice() throws InterruptedException
+	public boolean expandStatusOfARInvoice() throws InterruptedException
 	{
 		Thread.sleep(5000);
 		boolean status = false;
