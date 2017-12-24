@@ -4,6 +4,7 @@ package com.config;
 public class ControlFileDefinition 
 {	
 	/* Constants to define excel test data file work sheet names */
+	public static String  TEST_DATA_EXCEL_FILE = "WebAutomationTestData.xlsx";
 	/* Test Data excel work sheet name */
 	public static String TEST_DATA_SHEET_NAME = "Testdata";
 

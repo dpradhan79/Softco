@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.config.ControlFileDefinition;
 
 import junit.framework.Assert;
+import org.apache.log4j.Logger;
 
 public class HomePage extends LoginPage {
 
