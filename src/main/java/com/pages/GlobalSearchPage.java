@@ -9,6 +9,7 @@ import com.config.ControlFileDefinition;
 
 public class GlobalSearchPage extends HomePage{
 	
+	private static final Logger LOG = Logger.getLogger(HomePage.class);
 	HomePage obj = new HomePage();
 	
 	public int searchAndClickOnFirstRecord() throws InterruptedException

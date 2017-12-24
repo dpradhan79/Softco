@@ -5,11 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.config.ControlFileDefinition;
-
-import junit.framework.Assert;
-
 public class HomePage extends LoginPage {
 
 	private static final Logger LOG = Logger.getLogger(HomePage.class);
@@ -37,10 +35,14 @@ public class HomePage extends LoginPage {
 		
 		//Read the status if ARProcessing queue expand icon
 		boolean ARProcessingQueueIconStatus = expandStatusOfARProcessingQueue();
-		System.out.println(ARProcessingQueueIconStatus);		
+		System.out.println(ARProcessingQueueIconStatus);	
+		LOG.info("ARProcessingQueueIconStatus");
 		//Validate if ARProcessing queue status and click on icon if it is not expanded
 		if(ARProcessingQueueIconStatus)
+		{
 			System.out.println("ARProcessingQueueIcon is expanded");
+			LOG.info("ARProcessingQueueIcon is expanded");
+		}
 		else
 			driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ARProcessingQueueExpand/CollapseICon"))).click();
 		Thread.sleep(3000);
@@ -60,7 +62,7 @@ public class HomePage extends LoginPage {
 		Thread.sleep(3000);
 		
 		//validate whether application navigated to Search for a document page
-		Assert.assertEquals(true, driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CaptionText"))).isDisplayed());
+		Assert.assertEquals(driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "CaptionText"))).isDisplayed(), true);
 		System.out.println("Succesfully navigated to Search for adocument page");
 	}
 	
