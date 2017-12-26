@@ -1,5 +1,4 @@
 package tests;
-
 public class TC001ReadOnly {
 
 	/*public Map<String, String> objConfigData = null;

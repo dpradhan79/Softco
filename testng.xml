@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "SoftCoTests" parallel="tests" thread-count="5" preserve-order="true">
+	<listeners>
+		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>	
+		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>			
+	</listeners> 
+    <test name="TestDocumentSearch_DEVENV">
+    	<parameter name="APPURL" value="https://chgdev.softco.com/softco/"/>
+        <classes>
+       		<class name="tests.TestDocumentSearch" />        		
+        </classes>
+    </test>
+    <test name="TestDocumentSearch_TESTENV">
+    	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
+        <classes>
+       		<class name="tests.TestDocumentSearch" />        		
+        </classes>
+    </test>
+</suite>
+<!-- Suite -->
