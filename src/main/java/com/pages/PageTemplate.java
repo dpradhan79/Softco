@@ -47,4 +47,20 @@ public abstract class PageTemplate {
 		
 	}
 
+	protected String getAttribute(By byLocator, String attribute) throws Exception
+	{
+		String attributeValue = null;
+		try
+		{
+			attributeValue = this.driver.findElement(byLocator).getAttribute(attribute);
+			LOG.info(String.format("Click Successful - (By - %s)", byLocator));
+		}
+		catch(Exception ex)
+		{
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return attributeValue;
+		
+	}
 }
