@@ -23,6 +23,10 @@ public class TestDocumentSearch extends TestTemplate{
 		{
 			LOG.info(String.format("Login Successful for user - %s", userName));
 		}
+		else
+		{
+			LOG.error(String.format("Login Not Successful for user - %s", userName));
+		}
 		
 	}
 
