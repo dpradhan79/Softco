@@ -13,16 +13,18 @@ public class SoftCoLoginPage extends PageTemplate {
 		
 	}
 	
-	public boolean Login(String userName, String password)
+	public boolean Login(String url, String userName, String password)
 	{
 		boolean isSuccess = false;
 		try
 		{
+			
 			String byUserName = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "UserName");
 			String byPassword = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "Password");
 			String byLoginLanguageSelection = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginLanguageSelection");
 			String byLanguageEnglish = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LanguageEnglish(eng)");
 			String byLoginButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginButton");
+			this.driver.get(url);
 			this.SendKeys(By.xpath(byUserName), userName);
 			this.SendKeys(By.xpath(byPassword), password);
 			this.Click(By.xpath(byLoginLanguageSelection));
