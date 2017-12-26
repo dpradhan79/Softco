@@ -159,8 +159,10 @@ public class TestUtil {
 
 		System.out.println("Test Starts from row -> "+ testCaseStartRowNum);				
 		// total cols
-		int colStartRowNum=testCaseStartRowNum+1;
+		int colStartRowNum=testCaseStartRowNum  + 1;
+		
 		int cols=0;
+		
 		//Get the total number of columns for which test data is present
 		while(!xls.getCellData(sheetName, cols, colStartRowNum).equals("")){
 			cols++;
