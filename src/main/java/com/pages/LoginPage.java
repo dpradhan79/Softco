@@ -1,6 +1,5 @@
 package com.pages;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -11,31 +10,20 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.config.ControlFileDefinition;
-import com.excel.TestDataReader;
-import com.utilities.FrameworkConstants;
-import com.utilities.GeneralMethods;
+import com.config.IConstants;
+import com.utilities.ReusableLibs;
 
 import junit.framework.Assert;
 
 public class LoginPage{
-	public GeneralMethods objGeneralFunc = new GeneralMethods();
-	TestDataReader objTestDataReader = new TestDataReader();
-	public Map<String, String> TestData = null;
-	public WebDriver driver;
+	/*public ReusableLibs objReusableLib = new ReusableLibs();
 	
-	public Map<String, String> testDataReader(String scriptName)
-	{
-		FrameworkConstants.sScriptName = scriptName;
-		TestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
-				FrameworkConstants.sScriptName);
-		return TestData;
-	}
-	
+	private WebDriver driver;
+		
 	public WebDriver login(String URL, String userName, String password) throws InterruptedException
 	{
 		//Read chrome driver from location
-		System.setProperty("webdriver.chrome.driver",objGeneralFunc.getConfigProperty("chromeDriverPath"));
+		System.setProperty("webdriver.chrome.driver",objReusableLib.getConfigProperty("chromeDriverPath"));
 		    	
 		//Open browser
 		driver = new ChromeDriver();
@@ -53,27 +41,27 @@ public class LoginPage{
     	WebDriverWait wait = new WebDriverWait(driver, 180);
     			
     	//Wait for visibility of element polls for every 2sec
-    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "UserName"))));
+    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "UserName"))));
     	
     	//Input user-name to UserField
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "UserName"))).sendKeys(userName);
+    	driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "UserName"))).sendKeys(userName);
     	
     	//Input password to Password field
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "Password"))).sendKeys(password);
+    	driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "Password"))).sendKeys(password);
     	
     	//Click on Login language selection drop-down
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LoginLanguageSelection"))).click();
+    	driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginLanguageSelection"))).click();
     	Thread.sleep(3000);
     	
     	//Select language
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LanguageEnglish(eng)"))).click();
+    	driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LanguageEnglish(eng)"))).click();
     	
     	//Click on login button
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "LoginButton"))).click();
+    	driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginButton"))).click();
     	Thread.sleep(3000);
     	
     	//Validating is application logged in or not
-    	Assert.assertEquals(true, driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "ModuleIcon"))).isDisplayed());
+    	Assert.assertEquals(true, driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ModuleIcon"))).isDisplayed());
     	
     	return driver;
 	}
@@ -91,5 +79,5 @@ public class LoginPage{
     	(new Actions(driver)).dragAndDrop(element, target).perform();
     	Thread.sleep(3000);
 	}
-
+*/
 }

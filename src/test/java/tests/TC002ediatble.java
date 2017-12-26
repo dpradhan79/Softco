@@ -1,39 +1,19 @@
 package tests;
 
-import java.util.List;
-import java.util.Map;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import com.config.ControlFileDefinition;
-import com.pages.InvoicePage;
-import com.excel.TestDataReader;
-import com.utilities.FrameworkConstants;
-import com.utilities.GeneralMethods;
-
-
 public class TC002ediatble {
 
-	public Map<String, String> objConfigData = null;
+	/*public Map<String, String> objConfigData = null;
     public Map<String, String> objTestData = null;
     boolean bStatus;
     WebDriver driver;
 
-    public GeneralMethods objGeneralFunc = new GeneralMethods();
+    public ReusableLibs objGeneralFunc = new ReusableLibs();
     TestDataReader objTestDataReader = new TestDataReader();
     InvoicePage application = new InvoicePage();
 
-    /**
+    *//**
      * This method is used to get the configuration as well as test case specific details from the test data
-     */
+     *//*
 
     @BeforeClass
     public void setUp()
@@ -41,10 +21,10 @@ public class TC002ediatble {
         try
         {            
             // Read config data from the test data(Excel)
-            objConfigData = objTestDataReader.readConfigDataFromExcel(ControlFileDefinition.CONFIG_SHEET_NAME);
+            objConfigData = objTestDataReader.readConfigDataFromExcel(IConstants.CONFIG_SHEET_NAME);
 
             // Read test data based on the script name
-            objTestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
+            objTestData = objTestDataReader.readTestDataFromExcel(IConstants.TEST_DATA_SHEET_NAME,
             		FrameworkConstants.sScriptName);
         }
         catch (Exception e)
@@ -77,10 +57,10 @@ public class TC002ediatble {
     	application.validateAddCommentButtonDisplayed();
     	
     	//Drag splitter
-    	application.dragAndDrop(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "splitter"), objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "document_default_divisionInputField"));
+    	application.dragAndDrop(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "splitter"), objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "document_default_divisionInputField"));
     	
     	//print all the options available in Row
-    	List<WebElement> headerAvailable = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "PostingRowHeader")));
+    	List<WebElement> headerAvailable = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "PostingRowHeader")));
     	for(int i=0;i<headerAvailable.size();i++){
     		WebElement horizontal_scroll = driver.findElement(By.xpath("(//div[contains(@class,'table-header-wrap')])[2]//td["+(i+1)+"]")); 
         	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", horizontal_scroll);
@@ -92,7 +72,7 @@ public class TC002ediatble {
     	}
     	
     	//read check box web element and store to check box web element obj
-    	WebElement checkBox = driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "firstRowCheckBox")));
+    	WebElement checkBox = driver.findElement(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "firstRowCheckBox")));
     	
     	//Wait until element is clickable
     	WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -115,5 +95,5 @@ public class TC002ediatble {
     	
     	//Close browser
     	driver.close();
-    }
+    }*/
 }

@@ -1,34 +1,20 @@
 package tests;
 
-import java.util.Map;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import com.config.ControlFileDefinition;
-import com.pages.InvoicePage;
-import com.excel.TestDataReader;
-import com.utilities.FrameworkConstants;
-import com.utilities.GeneralMethods;
-
-
 public class TC001ReadOnly {
 
-	public Map<String, String> objConfigData = null;
+	/*public Map<String, String> objConfigData = null;
     public Map<String, Map<String, String>> objHostsDetails = null;
     public Map<String, String> objTestData = null;
     boolean bStatus;
     WebDriver driver;
 
-    public GeneralMethods objGeneralFunc = new GeneralMethods();
+    public ReusableLibs objGeneralFunc = new ReusableLibs();
     TestDataReader objTestDataReader = new TestDataReader();
     InvoicePage application = new InvoicePage();
 
-    /**
+    *//**
      * This method is used to get the configuration as well as test case specific details from the test data
-     */
+     *//*
 
     @BeforeClass
     public void setUp()
@@ -36,10 +22,10 @@ public class TC001ReadOnly {
         try
         {            
             // Read config data from the test data(Excel)
-            objConfigData = objTestDataReader.readConfigDataFromExcel(ControlFileDefinition.CONFIG_SHEET_NAME);
+            objConfigData = objTestDataReader.readConfigDataFromExcel(IConstants.CONFIG_SHEET_NAME);
 
             // Read test data based on the script name
-            objTestData = objTestDataReader.readTestDataFromExcel(ControlFileDefinition.TEST_DATA_SHEET_NAME,
+            objTestData = objTestDataReader.readTestDataFromExcel(IConstants.TEST_DATA_SHEET_NAME,
             		FrameworkConstants.sScriptName);
         }
         catch (Exception e)
@@ -72,7 +58,7 @@ public class TC001ReadOnly {
     	application.validateAllInputFieldsDiableInHeader();
     	
     	//Click on invoices
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "Invoices"))).click();
+    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "Invoices"))).click();
     	
     	//Navigate to search for invoices
     	application.navigateToSearchForInvoice();
@@ -90,7 +76,7 @@ public class TC001ReadOnly {
     	application.validateAllInputFieldsDiableInHeader();
     	
     	//Click on invoices
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "Invoices"))).click();
+    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "Invoices"))).click();
     	
     	//Navigate to search for invoices
     	application.navigateToSearchForTimeSheet();
@@ -112,5 +98,5 @@ public class TC001ReadOnly {
     	
     	//Close browser
     	driver.close();
-    }
+    }*/
 }

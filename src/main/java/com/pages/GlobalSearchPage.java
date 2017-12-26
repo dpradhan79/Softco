@@ -5,21 +5,21 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.config.ControlFileDefinition;
+import com.config.IConstants;
 
 public class GlobalSearchPage extends HomePage{
 	
-	private static final Logger LOG = Logger.getLogger(HomePage.class);
+	/*private static final Logger LOG = Logger.getLogger(HomePage.class);
 	HomePage obj = new HomePage();
 	
 	public int searchAndClickOnFirstRecord() throws InterruptedException
 	{
 		//Click on Search button
-		driver.findElement(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "SearchForDoc_SearchButton"))).click();
+		driver.findElement(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "SearchForDoc_SearchButton"))).click();
 		Thread.sleep(3000);
 		
 		//Get all the records displayed in results table
-		List<WebElement> results = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "rowsInResultsTable")));
+		List<WebElement> results = driver.findElements(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "rowsInResultsTable")));
 		
 		//Check results count
 		int resultsCount = results.size();
@@ -37,7 +37,7 @@ public class GlobalSearchPage extends HomePage{
 	public int clickOnFirstRecord() throws InterruptedException
 	{
 		//Get all the records displayed in results table
-		List<WebElement> results = driver.findElements(By.xpath(objGeneralFunc.getElementLocator(ControlFileDefinition.LOCATORSFILENAME, "rowsInResultsTable")));
+		List<WebElement> results = driver.findElements(By.xpath(objReusableLib.getElementLocator(IConstants.LOCATORSFILENAME, "rowsInResultsTable")));
 		
 		//Check results count
 		int resultsCount = results.size();
@@ -50,6 +50,6 @@ public class GlobalSearchPage extends HomePage{
 			results.get(1).click();
 			Thread.sleep(5000);
 		return resultsCount;
-	}
+	}*/
 
 }

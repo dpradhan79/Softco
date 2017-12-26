@@ -3,14 +3,19 @@ package com.utilities;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
 
-public class GeneralMethods 
-{
-    //TestDataReader objTestDataReader = new TestDataReader();
+import org.testng.log4testng.Logger;
 
+import com.config.IConstants;
+import com.google.common.io.Resources;
+
+public class ReusableLibs 
+{
+    private static final Logger LOG = Logger.getLogger(ReusableLibs.class);
 
     /**
      * Purpose: Invoke unlock.vbs process in master machine 
@@ -19,7 +24,7 @@ public class GeneralMethods
     {
         try
         {
-            String sVBSFilePath = System.getProperty("user.dir") + FrameworkConstants.JAVA_FILE_PATH_SEPARATOR + "unlock.vbs";
+            String sVBSFilePath = System.getProperty("user.dir") + File.pathSeparatorChar + "unlock.vbs";
             Runtime rt = Runtime.getRuntime();
             rt.exec("wscript.exe " + sVBSFilePath);
         }
@@ -39,25 +44,16 @@ public class GeneralMethods
     {
         try
         {
-            Properties prop = new Properties();
-            String sDirectoryFolderPath = System.getProperty("user.dir");
+            Properties prop = new Properties();            
 
-            String sFilePath = sDirectoryFolderPath + FrameworkConstants.JAVA_FILE_PATH_SEPARATOR + FrameworkConstants.CONFIG_PROPERTIES_PATH +"config.properties";
+            String sFilePath = Paths.get(Resources.getResource(IConstants.TEST_CONFIG_FILE).toURI()).toFile().getAbsolutePath();
 
             FileInputStream file = new FileInputStream(sFilePath);
-            InputStreamReader input = new InputStreamReader(file,"UTF-8");
+            InputStreamReader inputFileStreamReader = new InputStreamReader(file,"UTF-8");
 
-            prop.load(input);
+            prop.load(inputFileStreamReader);
             String sValue = prop.getProperty(sKeyName);
-            if(sKeyName.toLowerCase().contains("path"))
-            {
-                return sDirectoryFolderPath + sValue;
-            }
-            else
-            {
-                return sValue;
-            }
-
+            return sValue;
         }
         catch(Exception e)
         {
@@ -80,12 +76,11 @@ public class GeneralMethods
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String dt = sdf.format(cal.getTime());
-
             return dt;
         }
         catch(Exception e)
         {
-        	FrameworkConstants.gErrMsg = e.getMessage();
+        	LOG.debug(e.getStackTrace());
             return "false";
         }
     }
@@ -139,8 +134,7 @@ public class GeneralMethods
         
         catch(Exception e)
         {
-        	FrameworkConstants.gErrMsg = e.getMessage().toString();
-            System.out.println("Error Exception occured while trying to get XPath for the element:" + FrameworkConstants.gErrMsg);
+        	LOG.error(e.getStackTrace());
           
         }
 	    return false;
@@ -158,14 +152,16 @@ public class GeneralMethods
         {			
             Properties prop = new Properties();
 
-            String sFilePath = getConfigProperty("XPathFolderPath") + sPropertiesFileName;
+            //String sFilePath = getConfigProperty("XPathFolderPath") + sPropertiesFileName;
+            String sFilePath = Paths.get(Resources.getResource(IConstants.PAGE_ELEMENTS_LOCATION + File.pathSeparatorChar + sPropertiesFileName).toURI()).toFile().getAbsolutePath();
 
             File newfile = new File(sFilePath);
             bExists = newfile.exists();
             if(!bExists)
             {
-            	FrameworkConstants.gErrMsg = "Properties file not displayed in the given path:" + newfile.getAbsolutePath();
-                              return "-1";
+            	String gErrMsg = "Properties file not displayed in the given path:" + newfile.getAbsolutePath();
+                LOG.error(gErrMsg);              
+            	return "-1";
             } 
 
             FileInputStream file = new FileInputStream(sFilePath);
@@ -178,8 +174,8 @@ public class GeneralMethods
         }
         catch(Exception e)
         {
-        	FrameworkConstants.gErrMsg = e.getMessage().toString();
-            System.out.println("Error Exception occured while trying to get XPath for the element:" + sElementKey + " from file:" + sPropertiesFileName + "\n " + FrameworkConstants.gErrMsg);
+        	String gErrMsg = e.getMessage().toString();        	           
+            LOG.error("Error Exception occured while trying to get XPath for the element:" + sElementKey + " from file:" + sPropertiesFileName + "\n " + gErrMsg);
             return "-1";
         }
     }
