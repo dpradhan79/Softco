@@ -4,6 +4,8 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
+
+import com.pages.SoftCoGlobalSearchPage;
 import com.pages.SoftCoLoginPage;
 
 public class TestDocumentSearch extends TestTemplate{
@@ -27,7 +29,8 @@ public class TestDocumentSearch extends TestTemplate{
 			LOG.error(String.format("Login Not Successful for user - %s", userName));
 		}
 		
-		
+		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
+		searchPage.validateSearchForDocument(isAddButtonVisisble);
 		
 		loginPage.logout();
 	}

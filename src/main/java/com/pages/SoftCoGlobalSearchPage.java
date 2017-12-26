@@ -16,7 +16,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 		super(webDriver);
 		
 	}
-	public boolean validateSearchForADocument(String AddButtonStatus) throws Exception
+	public boolean validateSearchForDocument(String AddButtonStatus) throws Exception
 	{
 		boolean isSuccess = false;
 		try
