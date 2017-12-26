@@ -76,7 +76,9 @@ public abstract class PageTemplate {
 			//Click on logout
 			String logoutButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LogoutButton");
 			
+			//Wait For Logout Button To Be Clickable, as click throwing staleelementexception.
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(logoutButton)));
+			
 			this.driver.findElement(By.xpath(logoutButton)).click();
 			LOG.info(String.format("Click Successful - (By - %s)", logoutButton));
 			
