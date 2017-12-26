@@ -1,5 +1,7 @@
 package com.pages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -128,6 +130,21 @@ public abstract class PageTemplate {
 			LOG.info(String.format("Element not displayed - (By - %s)", byLocator));
 			isSuccess = false;
 		}
+		catch(AssertionError ae)
+		{
+			LOG.info(String.format("Element not displayed - (By - %s)", byLocator));
+			isSuccess = false;
+		}
 		return isSuccess;
+	}
+	
+	public void implicitwait(int sec)
+	{
+		try {
+			TimeUnit.SECONDS.sleep(sec);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
