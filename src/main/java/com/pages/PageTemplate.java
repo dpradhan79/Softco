@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.config.IConstants;
 import com.utilities.ReusableLibs;
@@ -89,5 +90,41 @@ public abstract class PageTemplate {
 		}
 	}
 	
+	public boolean waitUntilElementIsClickable(By byLocator)
+	{
+		boolean isSuccess = false;
+		try
+		{
+		String timeout = reUsableLib.getConfigProperty("PageLoadTimeOutInSecs");
+		WebDriverWait wait = new WebDriverWait(this.driver,Long.valueOf(timeout).longValue());
+		wait.until(ExpectedConditions.elementToBeClickable(byLocator));
+		LOG.info(String.format("Element clickable - (By - %s)", byLocator));
+		isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
 	
+	public boolean isElementDisplayed(By byLocator)
+	{
+		boolean isSuccess = false;
+		try
+		{
+			//validate element is displayed or not
+			Assert.assertEquals(driver.findElements(byLocator).size(), 1);
+			LOG.info(String.format("Element displayed - (By - %s)", byLocator));
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			LOG.info(String.format("Element not displayed - (By - %s)", byLocator));
+			isSuccess = false;
+		}
+		return isSuccess;
+	}
 }
