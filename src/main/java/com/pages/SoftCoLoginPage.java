@@ -13,7 +13,7 @@ public class SoftCoLoginPage extends PageTemplate {
 		
 	}
 	
-	public boolean Login(String url, String userName, String password)
+	public boolean Login(String url, String userName, String password) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -36,6 +36,7 @@ public class SoftCoLoginPage extends PageTemplate {
 		{
 			isSuccess = false;
 			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
 		}
 		
 		return isSuccess;

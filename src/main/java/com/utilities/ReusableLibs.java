@@ -24,7 +24,7 @@ public class ReusableLibs
     {
         try
         {
-            String sVBSFilePath = System.getProperty("user.dir") + File.pathSeparatorChar + "unlock.vbs";
+            String sVBSFilePath = System.getProperty("user.dir") + File.separatorChar + "unlock.vbs";
             Runtime rt = Runtime.getRuntime();
             rt.exec("wscript.exe " + sVBSFilePath);
         }
@@ -153,7 +153,7 @@ public class ReusableLibs
             Properties prop = new Properties();
 
             //String sFilePath = getConfigProperty("XPathFolderPath") + sPropertiesFileName;
-            String sFilePath = Paths.get(Resources.getResource(IConstants.PAGE_ELEMENTS_LOCATION + File.pathSeparatorChar + sPropertiesFileName).toURI()).toFile().getAbsolutePath();
+            String sFilePath = Paths.get(Resources.getResource(IConstants.PAGE_ELEMENTS_LOCATION + File.separatorChar + sPropertiesFileName).toURI()).toFile().getAbsolutePath();
 
             File newfile = new File(sFilePath);
             bExists = newfile.exists();
