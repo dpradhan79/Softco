@@ -2,9 +2,8 @@ package tests;
 
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
-
 import com.pages.SoftCoLoginPage;
 
 public class TestDocumentSearch extends TestTemplate{
@@ -18,7 +17,7 @@ public class TestDocumentSearch extends TestTemplate{
 		String isAddButtonVisisble = data.get("isAddButtonVisisble");
 		
 		SoftCoLoginPage loginPage = new SoftCoLoginPage(this.webDriver);
-		boolean isSuccess = loginPage.Login(this.url, userName, password);
+		boolean isSuccess = loginPage.login(this.url, userName, password);
 		if(isSuccess)
 		{
 			LOG.info(String.format("Login Successful for user - %s", userName));
@@ -28,6 +27,9 @@ public class TestDocumentSearch extends TestTemplate{
 			LOG.error(String.format("Login Not Successful for user - %s", userName));
 		}
 		
+		
+		
+		loginPage.logout();
 	}
 
 }

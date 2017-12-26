@@ -13,7 +13,7 @@ public class SoftCoLoginPage extends PageTemplate {
 		
 	}
 	
-	public boolean Login(String url, String userName, String password) throws Exception
+	public boolean login(String url, String userName, String password) throws Exception
 	{
 		boolean isSuccess = false;
 		try

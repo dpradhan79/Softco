@@ -3,7 +3,10 @@ package com.pages;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.config.IConstants;
 import com.utilities.ReusableLibs;
 
 public abstract class PageTemplate {
@@ -63,4 +66,28 @@ public abstract class PageTemplate {
 		return attributeValue;
 		
 	}
+	
+	public void logout()
+	{
+		try
+		{
+			String byLoginButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginButton");
+			//Click on logout
+			String logoutButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LogoutButton");
+			this.driver.findElement(By.xpath(logoutButton)).click();
+			LOG.info(String.format("Click Successful - (By - %s)", logoutButton));
+			
+			//wait until application logged out
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(byLoginButton)));
+			LOG.info("Application logged out successfully");
+		}
+		catch(Exception ex)
+		{
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+	}
+	
+	
 }
