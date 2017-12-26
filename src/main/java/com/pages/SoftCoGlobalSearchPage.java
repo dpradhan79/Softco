@@ -121,7 +121,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	public boolean validateAllFieldsAreDisabledInHeader()
+	private boolean validateAllFieldsAreDisabledInHeader()
 	{
 		boolean isSuccess = false;
 		try
@@ -141,11 +141,11 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
     	{
     		if((inputFields.get(i).getAttribute("readonly")).equalsIgnoreCase("true"))
     		{
-    			LOG.info("Input field " + inputFieldLables.get(i) + " is diabled");
+    			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is diabled");
     		}
     		else
     		{
-    			LOG.error("Input field " + inputFieldLables.get(i) + " is not diabled");
+    			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is enabled");
     		}
     		isSuccess = true;
     	}
