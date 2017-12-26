@@ -71,14 +71,16 @@ public abstract class PageTemplate {
 	{
 		try
 		{
+			WebDriverWait wait = new WebDriverWait(driver, 20);
 			String byLoginButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginButton");
 			//Click on logout
 			String logoutButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LogoutButton");
+			
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(logoutButton)));
 			this.driver.findElement(By.xpath(logoutButton)).click();
 			LOG.info(String.format("Click Successful - (By - %s)", logoutButton));
 			
-			//wait until application logged out
-			WebDriverWait wait = new WebDriverWait(driver, 20);
+			//wait until application logged out			
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(byLoginButton)));
 			LOG.info("Application logged out successfully");
 		}
