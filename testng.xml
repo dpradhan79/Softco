@@ -11,11 +11,13 @@
        		<class name="tests.TestDocumentSearch" />        		
         </classes>
     </test>
+    <!--
     <test name="TestDocumentSearch_TESTENV">
     	<parameter name="APPURL" value="https://chgdev.softco.com/softco/"/>
         <classes>
        		<class name="tests.TestDocumentSearch" />        		
         </classes>
     </test>
+    -->
 </suite>
 <!-- Suite -->
