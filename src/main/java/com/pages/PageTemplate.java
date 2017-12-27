@@ -29,6 +29,7 @@ public abstract class PageTemplate {
 	{
 		try
 		{
+			this.waitUntilElementIsClickable(byLocator);
 			this.driver.findElement(byLocator).sendKeys(text);
 			LOG.info(String.format("SendKeys Successful - (By - %s, text - %s)", byLocator, text));
 		}
@@ -44,6 +45,7 @@ public abstract class PageTemplate {
 	{
 		try
 		{
+			this.waitUntilElementIsClickable(byLocator);
 			this.driver.findElement(byLocator).click();;
 			LOG.info(String.format("Click Successful - (By - %s)", byLocator));
 		}
@@ -60,6 +62,7 @@ public abstract class PageTemplate {
 		String attributeValue = null;
 		try
 		{
+			this.waitUntilElementIsClickable(byLocator);
 			attributeValue = this.driver.findElement(byLocator).getAttribute(attribute);
 			LOG.info(String.format("Click Successful - (By - %s)", byLocator));
 		}
@@ -97,7 +100,8 @@ public abstract class PageTemplate {
 		}
 	}
 	
-	public boolean waitUntilElementIsClickable(By byLocator)
+
+	protected boolean waitUntilElementIsClickable(By byLocator)
 	{
 		boolean isSuccess = false;
 		try
