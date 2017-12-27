@@ -121,7 +121,7 @@ public abstract class PageTemplate {
 		return isSuccess;
 	}
 	
-	public boolean isElementDisplayed(By byLocator)
+	protected boolean isElementDisplayed(By byLocator)
 	{
 		boolean isSuccess = false;
 		try
@@ -144,7 +144,7 @@ public abstract class PageTemplate {
 		return isSuccess;
 	}
 	
-	public void implicitwait(int sec)
+	protected void implicitwait(int sec)
 	{
 		try {
 			TimeUnit.SECONDS.sleep(sec);
@@ -168,5 +168,15 @@ public abstract class PageTemplate {
     	LOG.info(String.format("Drag element - (By - %s)", source));
     	LOG.info(String.format("drop element at - (By - %s)", target));
     	implicitwait(2);
+	}
+	
+	protected String takeScreemShot()
+	{
+		String screenshotLocation = null;
+		String screenShotAbsolutePath = null;
+		
+		
+		
+		return screenShotAbsolutePath;
 	}
 }

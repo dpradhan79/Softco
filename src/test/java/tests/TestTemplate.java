@@ -12,8 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
 import com.excel.Xls_Reader;
@@ -40,7 +40,7 @@ public class TestTemplate {
 		return objMetrics;
 	}
 	
-	@BeforeTest
+	@BeforeMethod
 	public void BeforeTest(ITestContext testContext) throws URISyntaxException
 	{
 		ReusableLibs reUsableLib = new ReusableLibs();
@@ -91,7 +91,7 @@ public class TestTemplate {
 		
 	}
 	
-	@AfterTest
+	@AfterMethod
 	public void AfterTest(ITestContext testContext)
 	{
 		this.webDriver.close();
