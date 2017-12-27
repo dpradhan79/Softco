@@ -179,4 +179,37 @@ public abstract class PageTemplate {
 		
 		return screenShotAbsolutePath;
 	}
+	
+	protected boolean checkCheckBox(By byLocator)
+	{
+		boolean isSuccess = false;
+		try
+		{
+			//read check box web element and store to check box web element obj
+	    	WebElement checkBox = this.driver.findElement(byLocator);
+	    	
+	    	//Wait until element is clickable
+	    	this.waitUntilElementIsClickable(byLocator);
+	    	
+	    	//Click on check-box
+	    	if(checkBox.isSelected())
+	    	{
+	    		LOG.info("check-box already checked");
+	    	}
+	    	else
+	    	{
+	    	Actions act = new Actions(this.driver);
+	    	act.moveToElement(checkBox).click().build().perform();
+	    	LOG.info("check-box checked successfully");
+	    	}
+	    	isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
 }

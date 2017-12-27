@@ -16,7 +16,7 @@ public class TC002ediatble extends TestTemplate{
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");
-		String isAddButtonVisisble = data.get("isAddButtonVisisble");
+		String isEditable = data.get("missingClient_isEditable");
 		
 		SoftCoLoginPage loginPage = new SoftCoLoginPage(this.webDriver);
 		boolean isSuccess = loginPage.login(this.url, userName, password);
@@ -30,7 +30,7 @@ public class TC002ediatble extends TestTemplate{
 		}
 		
 		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
-		searchPage.validateSearchForDocument(isAddButtonVisisble);
+		searchPage.validateMissingClient(isEditable);
 		
 		loginPage.logout();
 	}

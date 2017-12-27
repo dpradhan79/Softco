@@ -21,6 +21,8 @@ public class SoftCoHomePage extends PageTemplate {
 			String byARInvoice = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoiceExpand/CollapseICon");
 			String className = this.getAttribute(By.xpath(byARInvoice), "class");
 			
+			this.implicitwait(3);
+			
 			//Validating whether the ICON is in expand / collapse status 
 			boolean status = false;
 			if(className.contains("closed"))

@@ -1,11 +1,15 @@
 package com.pages;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.config.IConstants;
 
@@ -17,23 +21,23 @@ public class SoftCoInvoicePage extends PageTemplate {
 		
 	}	
 	
-	protected boolean addButtonVisibility(String searchDocument_isEditable)
+	private boolean addButtonVisibility(String isEditable)
 	{
 		boolean isSuccess = false;
 		try
 		{
 			String addButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "AddButton");
-			String searchCriteria = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchCriteriaButton");
-			this.waitUntilElementIsClickable(By.xpath(searchCriteria));
+			String ElipsesMenu = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ElipsesMenu");
+			this.waitUntilElementIsClickable(By.xpath(ElipsesMenu));
 			boolean addButtonStatus = this.isElementDisplayed(By.xpath(addButton));
-			if(searchDocument_isEditable.equalsIgnoreCase("yes"))
+			if(isEditable.equalsIgnoreCase("yes"))
 			{
 				if(addButtonStatus)
 					LOG.info("Add button Displayed");
 				else
 					LOG.error("Add button not displayed");
 			}
-			else if(searchDocument_isEditable.equalsIgnoreCase("No"))
+			else if(isEditable.equalsIgnoreCase("No"))
 			{
 				if(addButtonStatus)
 					LOG.error("Add button Displayed");
@@ -51,7 +55,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	protected boolean emailTemplateValidation() throws Exception
+	private boolean emailTemplateValidation() throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -78,7 +82,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	protected boolean validateAllFieldsInHeader()
+	private boolean validateAllFieldsInHeader()
 	{
 		boolean isSuccess = false;
 		try
@@ -96,11 +100,14 @@ public class SoftCoInvoicePage extends PageTemplate {
     	//iterate and validate all are disabled or not
     	for(int i=1;i<inputFields.size();i++)
     	{
-    		if((inputFields.get(i).getAttribute("readonly")).equalsIgnoreCase("true"))
+    		String attribute = inputFields.get(i).getAttribute("readonly");
+    		LOG.info("Read Only Attribute value of " + inputFieldLables.get(i).getText() + " is " + attribute);
+    		try
     		{
+    			Assert.assertNotNull(attribute);
     			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is diabled");
     		}
-    		else
+    		catch(AssertionError a)
     		{
     			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is enabled");
     		}
@@ -116,7 +123,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	protected boolean isPossibleToAddComment(String isEditable) throws Exception
+	private boolean isPossibleToAddComment(String isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -145,5 +152,69 @@ public class SoftCoInvoicePage extends PageTemplate {
 			throw ex;
 		}
 		return isSuccess;
+	}
+	
+	private List<String> validateHeadersAvailableInPostingRow()
+	{
+		//print all the options available in Row
+		List<String> headerDetails = new ArrayList<String>();
+		String postingRowHeaders = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "PostingRowHeader");
+		
+    	List<WebElement> headersAvailable = this.driver.findElements(By.xpath(postingRowHeaders));
+    	LOG.info("Total columns available are " + headersAvailable.size());
+    	
+    	for(int i=1;i<headersAvailable.size();i++){
+    		WebElement horizontal_scroll = this.driver.findElement(By.xpath("(//div[contains(@class,'table-header-wrap')])[2]//td["+(i+1)+"]")); 
+        	((JavascriptExecutor) this.driver).executeScript("arguments[0].scrollIntoView(true);", horizontal_scroll);
+        	
+        	LOG.info("Column " + i + " title is " + headersAvailable.get(i).getText());
+        	
+        	WebElement rowInfo = driver.findElement(By.xpath("//div[contains(@class,'scrollable v-table')]//tr[@class='v-table-row']/td["+(i+1)+"]//input")); 
+        	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rowInfo);
+    		
+        	String attribute = driver.findElement(By.xpath("//div[contains(@class,'scrollable v-table')]//tr[@class='v-table-row']/td["+(i+1)+"]//input")).getAttribute("readonly");
+    		LOG.info("Read Only Attribute value of " + headersAvailable.get(i).getText() + " " + attribute);
+    		try
+    		{
+    			Assert.assertNotNull(attribute);
+    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is diabled");
+    		}
+    		catch(AssertionError a)
+    		{
+    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is enabled");
+    		}
+    	}
+		return headerDetails;
+	}
+	
+	protected void validateInvoicePage(String isEditable) throws Exception
+	{
+		String splitter = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "splitter");
+		String divisionInputFiels = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "document_default_divisionInputField");
+		
+		this.addButtonVisibility(isEditable);
+		this.emailTemplateValidation();
+		this.validateAllFieldsInHeader();
+		this.isPossibleToAddComment(isEditable);
+		
+		this.dragAndDrop(By.xpath(splitter), By.xpath(divisionInputFiels));
+		
+		this.validateHeadersAvailableInPostingRow();
+		
+		String firstRowCheckBox = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "firstRowCheckBox");
+		this.checkCheckBox(By.xpath(firstRowCheckBox));
+		this.validateCRUDOptionsPresentForASelectedRow();
+	}
+	
+	private void validateCRUDOptionsPresentForASelectedRow() throws Exception
+	{
+		String CaseRowOptionsDD = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "CaseRowOptionsDD");
+		String optionsAvailableInDD = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "optionsAvailableInDD");
+		this.Click(By.xpath(CaseRowOptionsDD));
+		List<WebElement> options = this.driver.findElements(By.xpath(optionsAvailableInDD));
+		for(int i=0;i<options.size();i++)
+		{
+			LOG.info("Option " + i + " is " + options.get(i).getText());
+		}
 	}
 }
