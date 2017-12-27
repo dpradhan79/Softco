@@ -50,6 +50,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			
 			invoicePageObj.validateInvoicePage(isEditable);
 			this.Click(By.xpath(invoice));
+			invoicePageObj.acceptUnSavedChangesPopUp();
 		}
 		catch(Exception ex)
 		{

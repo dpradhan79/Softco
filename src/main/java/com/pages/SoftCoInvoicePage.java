@@ -243,4 +243,19 @@ public class SoftCoInvoicePage extends PageTemplate {
 			LOG.info("Option " + i + " is " + options.get(i).getText());
 		}
 	}
+	
+	protected void acceptUnSavedChangesPopUp() throws Exception
+	{
+		String OkButtonUnSavedChangesPopUp = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "OkButtonUnSavedChangesPopUp");
+		
+		boolean elementStatus = this.isElementDisplayed(By.xpath(OkButtonUnSavedChangesPopUp));
+		if(elementStatus)
+		{
+			this.Click(By.xpath(OkButtonUnSavedChangesPopUp));
+		}
+		else
+		{
+			LOG.info("All changes Saved");
+		}
+	}
 }
