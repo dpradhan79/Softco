@@ -8,14 +8,18 @@
     <test name="TestDocumentSearch_DEVENV">
     	<parameter name="APPURL" value="https://chgdev.softco.com/softco/"/>
         <classes>
-       		<class name="tests.TestDocumentSearch" />        		
+       		<class name="tests.TestDocumentSearch" />
+       		<class name="tests.TestMissingClient" />     		
         </classes>
     </test>
+    
     <test name="TestDocumentSearch_TESTENV">
-    	<parameter name="APPURL" value="https://chgdev.softco.com/softco/"/>
+    	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
         <classes>
-       		<class name="tests.TestDocumentSearch" />        		
+       		<class name="tests.TestMissingClient" />
+       		<class name="tests.TestMissingClient" />            		
         </classes>
     </test>
+   
 </suite>
 <!-- Suite -->
