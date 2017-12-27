@@ -1,20 +1,5 @@
 package com.pages;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.config.IConstants;
-import com.utilities.ReusableLibs;
-
-import junit.framework.Assert;
-
 public class LoginPage{
 	/*public ReusableLibs objReusableLib = new ReusableLibs();
 	

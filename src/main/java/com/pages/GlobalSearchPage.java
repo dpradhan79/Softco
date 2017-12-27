@@ -1,12 +1,5 @@
 package com.pages;
 
-import java.util.List;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.config.IConstants;
-
 public class GlobalSearchPage extends HomePage{
 	
 	/*private static final Logger LOG = Logger.getLogger(HomePage.class);
