@@ -17,7 +17,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 		super(webDriver);
 		
 	}
-	public boolean validateSearchForDocument(String isAddButtonVisisble) throws Exception
+	public boolean validateSearchForDocument(String searchDocument_isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -47,7 +47,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			LOG.info("clicked on first available record");
 			isSuccess = true;
 			
-			invoicePageObj.addButtonVisibility(isAddButtonVisisble);
+			invoicePageObj.addButtonVisibility(searchDocument_isEditable);
 			invoicePageObj.emailTemplateValidation();
 			invoicePageObj.validateAllFieldsInHeader();
 			this.Click(By.xpath(invoice));

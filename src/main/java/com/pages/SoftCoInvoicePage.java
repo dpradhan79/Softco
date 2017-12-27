@@ -17,7 +17,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		
 	}	
 	
-	protected boolean addButtonVisibility(String isAddButtonVisisble)
+	protected boolean addButtonVisibility(String searchDocument_isEditable)
 	{
 		boolean isSuccess = false;
 		try
@@ -26,14 +26,14 @@ public class SoftCoInvoicePage extends PageTemplate {
 			String searchCriteria = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchCriteriaButton");
 			this.waitUntilElementIsClickable(By.xpath(searchCriteria));
 			boolean addButtonStatus = this.isElementDisplayed(By.xpath(addButton));
-			if(isAddButtonVisisble.equalsIgnoreCase("yes"))
+			if(searchDocument_isEditable.equalsIgnoreCase("yes"))
 			{
 				if(addButtonStatus)
 					LOG.info("Add button Displayed");
 				else
 					LOG.error("Add button not displayed");
 			}
-			else if(isAddButtonVisisble.equalsIgnoreCase("No"))
+			else if(searchDocument_isEditable.equalsIgnoreCase("No"))
 			{
 				if(addButtonStatus)
 					LOG.error("Add button Displayed");
