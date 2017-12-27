@@ -75,7 +75,7 @@ public abstract class PageTemplate {
 		
 	}
 	
-	public void logout()
+	public void logout() throws Exception
 	{
 		try
 		{
@@ -89,6 +89,18 @@ public abstract class PageTemplate {
 			
 			this.driver.findElement(By.xpath(logoutButton)).click();
 			LOG.info(String.format("Click Successful - (By - %s)", logoutButton));
+			
+			String OkButtonUnSavedChangesPopUp = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "OkButtonUnSavedChangesPopUp");
+			
+			boolean elementStatus = this.isElementDisplayed(By.xpath(OkButtonUnSavedChangesPopUp));
+			if(elementStatus)
+			{
+				this.Click(By.xpath(OkButtonUnSavedChangesPopUp));
+			}
+			else
+			{
+				LOG.info("All changes Saved");
+			}
 			
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(byLoginButton)));
 			LOG.info("Application logged out successfully");
@@ -127,6 +139,7 @@ public abstract class PageTemplate {
 		try
 		{
 			//validate element is displayed or not
+			implicitwait(2);
 			Assert.assertEquals(driver.findElements(byLocator).size(), 1);
 			LOG.info(String.format("Element displayed - (By - %s)", byLocator));
 			isSuccess = true;
@@ -178,5 +191,38 @@ public abstract class PageTemplate {
 		
 		
 		return screenShotAbsolutePath;
+	}
+	
+	protected boolean checkCheckBox(By byLocator)
+	{
+		boolean isSuccess = false;
+		try
+		{
+			//read check box web element and store to check box web element obj
+	    	WebElement checkBox = this.driver.findElement(byLocator);
+	    	
+	    	//Wait until element is clickable
+	    	this.waitUntilElementIsClickable(byLocator);
+	    	
+	    	//Click on check-box
+	    	if(checkBox.isSelected())
+	    	{
+	    		LOG.info("check-box already checked");
+	    	}
+	    	else
+	    	{
+	    	Actions act = new Actions(this.driver);
+	    	act.moveToElement(checkBox).click().build().perform();
+	    	LOG.info("check-box checked successfully");
+	    	}
+	    	isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
 	}
 }

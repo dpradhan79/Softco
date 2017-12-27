@@ -12,12 +12,13 @@ import com.config.IConstants;
 public class SoftCoGlobalSearchPage extends PageTemplate {
 	SoftCoInvoicePage invoicePageObj = new SoftCoInvoicePage(this.driver);
 	SoftCoHomePage homePageObj = new SoftCoHomePage(this.driver);
+	
 	private static final Logger LOG = Logger.getLogger(SoftCoGlobalSearchPage.class);
 	public SoftCoGlobalSearchPage(WebDriver webDriver) {
 		super(webDriver);
 		
 	}
-	public boolean validateSearchForDocument(String searchDocument_isEditable) throws Exception
+	public boolean validateSearchForDocument(String isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -47,10 +48,9 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			LOG.info("clicked on first available record");
 			isSuccess = true;
 			
-			invoicePageObj.addButtonVisibility(searchDocument_isEditable);
-			invoicePageObj.emailTemplateValidation();
-			invoicePageObj.validateAllFieldsInHeader();
+			invoicePageObj.validateInvoicePage(isEditable);
 			this.Click(By.xpath(invoice));
+			invoicePageObj.acceptUnSavedChangesPopUp();
 		}
 		catch(Exception ex)
 		{
@@ -61,7 +61,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	public boolean validateMissingClient(String isAddButtonVisisble) throws Exception
+	public boolean validateMissingClient(String isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -85,9 +85,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			LOG.info("clicked on first available record");
 			isSuccess = true;
 			
-			invoicePageObj.addButtonVisibility(isAddButtonVisisble);
-			invoicePageObj.emailTemplateValidation();
-			invoicePageObj.validateAllFieldsInHeader();
+			invoicePageObj.validateInvoicePage(isEditable);
 		}
 		catch(Exception ex)
 		{

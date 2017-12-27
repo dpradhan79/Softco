@@ -8,15 +8,15 @@ import org.testng.annotations.Test;
 import com.pages.SoftCoGlobalSearchPage;
 import com.pages.SoftCoLoginPage;
 
-public class TestDocumentSearch extends TestTemplate{
+public class TestMissingClient extends TestTemplate{
 	
-	private static final Logger LOG = Logger.getLogger(TestDocumentSearch.class);
+	private static final Logger LOG = Logger.getLogger(TestMissingClient.class);
 	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
-	public void ValidateDocumentSearch(Hashtable<String, String> data) throws Exception
+	public void ValidateMissingClient(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");
-		String isAddButtonVisisble = data.get("searchDocument_isEditable");
+		String isEditable = data.get("missingClient_isEditable");
 		
 		SoftCoLoginPage loginPage = new SoftCoLoginPage(this.webDriver);
 		boolean isSuccess = loginPage.login(this.url, userName, password);
@@ -30,7 +30,7 @@ public class TestDocumentSearch extends TestTemplate{
 		}
 		
 		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
-		searchPage.validateSearchForDocument(isAddButtonVisisble);
+		searchPage.validateMissingClient(isEditable);
 		
 		loginPage.logout();
 	}

@@ -18,8 +18,11 @@ public class SoftCoHomePage extends PageTemplate {
 		boolean isSuccess = false;
 		try
 		{
+			this.implicitwait(3);
 			String byARInvoice = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoiceExpand/CollapseICon");
 			String className = this.getAttribute(By.xpath(byARInvoice), "class");
+			
+			
 			
 			//Validating whether the ICON is in expand / collapse status 
 			boolean status = false;
