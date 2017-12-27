@@ -154,10 +154,10 @@ public class SoftCoHomePage extends PageTemplate {
 		{
 			this.expandARInvoice();
 			this.expandARProcessingQueue();
-			this.expandARGlobalSearch();
 			
 			String byMissingClient = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "MissingClientLink");
 			this.Click(By.xpath(byMissingClient));
+			this.implicitwait(3);
 			isSuccess = true;
 		}
 		catch(Exception ex)

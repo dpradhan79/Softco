@@ -1,101 +1,38 @@
 package tests;
-public class TC001ReadOnly {
 
-	/*public Map<String, String> objConfigData = null;
-    public Map<String, Map<String, String>> objHostsDetails = null;
-    public Map<String, String> objTestData = null;
-    boolean bStatus;
-    WebDriver driver;
+import java.util.Hashtable;
 
-    public ReusableLibs objGeneralFunc = new ReusableLibs();
-    TestDataReader objTestDataReader = new TestDataReader();
-    InvoicePage application = new InvoicePage();
+import org.apache.log4j.Logger;
+import org.testng.annotations.Test;
 
-    *//**
-     * This method is used to get the configuration as well as test case specific details from the test data
-     *//*
+import com.pages.SoftCoGlobalSearchPage;
+import com.pages.SoftCoLoginPage;
 
-    @BeforeClass
-    public void setUp()
-    {
-        try
-        {            
-            // Read config data from the test data(Excel)
-            objConfigData = objTestDataReader.readConfigDataFromExcel(IConstants.CONFIG_SHEET_NAME);
+public class TC001ReadOnly extends TestTemplate{
+	
+	private static final Logger LOG = Logger.getLogger(TC001ReadOnly.class);
+	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
+	public void ValidateDocumentSearch(Hashtable<String, String> data) throws Exception
+	{
+		String userName = data.get("UserName");
+		String password = data.get("Password");
+		String isAddButtonVisisble = data.get("isAddButtonVisisble");
+		
+		SoftCoLoginPage loginPage = new SoftCoLoginPage(this.webDriver);
+		boolean isSuccess = loginPage.login(this.url, userName, password);
+		if(isSuccess)
+		{
+			LOG.info(String.format("Login Successful for user - %s", userName));
+		}
+		else
+		{
+			LOG.error(String.format("Login Not Successful for user - %s", userName));
+		}
+		
+		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
+		searchPage.validateSearchForDocument(isAddButtonVisisble);
+		
+		loginPage.logout();
+	}
 
-            // Read test data based on the script name
-            objTestData = objTestDataReader.readTestDataFromExcel(IConstants.TEST_DATA_SHEET_NAME,
-            		FrameworkConstants.sScriptName);
-        }
-        catch (Exception e)
-        {   
-            System.out.println("Exception in setup method:" + e.getCause().toString());
-        }
-    }
-
-    @Test
-    public void tc001() throws Exception
-    {
-    	objTestData = application.testDataReader("tc001ReadOnlyValidatons");
-    	
-    	//Login to application 
-    	driver = application.login(objConfigData.get("SoftCo_URL"), objConfigData.get("userName_ReadOnly"), objConfigData.get("password_ReadOnly"));
-    	
-    	//Navigate to Search for a document 
-    	application.navigateToSearchForADocument();
-    	
-    	//Click on search for the document and click on first record available 
-    	application.searchAndClickOnFirstRecord();
-    	
-    	//Verify Add button not displayed
-    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
-    	
-    	//Validate email pop-up is displayed
-    	application.emailTemplateValidation();
-    	
-    	//Validate all the input fields in header are disabled
-    	application.validateAllInputFieldsDiableInHeader();
-    	
-    	//Click on invoices
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "Invoices"))).click();
-    	
-    	//Navigate to search for invoices
-    	application.navigateToSearchForInvoice();
-    	
-    	//Search and select 1st record displayed
-    	application.searchAndClickOnFirstRecord();
-    	
-    	//Verify Add button not displayed
-    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
-    	
-    	//Validate email pop-up is displayed
-    	application.emailTemplateValidation();
-    	
-    	//Validate all the input fields in header are disabled
-    	application.validateAllInputFieldsDiableInHeader();
-    	
-    	//Click on invoices
-    	driver.findElement(By.xpath(objGeneralFunc.getElementLocator(IConstants.LOCATORSFILENAME, "Invoices"))).click();
-    	
-    	//Navigate to search for invoices
-    	application.navigateToSearchForTimeSheet();
-    	
-    	//Search and select 1st record displayed
-    	application.searchAndClickOnFirstRecord();
-    	
-    	//Verify Add button not displayed
-    	application.addButtonViibility(objTestData.get("AddButtonStatus"));
-    	
-    	//Validate email pop-up is displayed
-    	application.emailTemplateValidation();
-    	
-    	//Validate all the input fields in header are disabled
-    	application.validateAllInputFieldsDiableInHeader();
-    	
-    	//logout user
-    	application.logout();
-    	
-    	//Close browser
-    	driver.close();
-    }*/
 }

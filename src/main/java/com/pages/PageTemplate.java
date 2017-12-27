@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -146,5 +148,21 @@ public abstract class PageTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	protected void dragAndDrop(By source , By target)
+	{
+		implicitwait(3);
+		//Read and store drag location
+    	WebElement drag = this.driver.findElement(source);
+    	
+    	//read and store drop location
+    	WebElement drop = this.driver.findElement(target);
+    	
+    	//drag and drop
+    	(new Actions(driver)).dragAndDrop(drag, drop).perform();
+    	LOG.info(String.format("Drag element - (By - %s)", source));
+    	LOG.info(String.format("drop element at - (By - %s)", target));
+    	implicitwait(2);
 	}
 }
