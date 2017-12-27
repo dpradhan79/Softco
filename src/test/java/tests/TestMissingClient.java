@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 import com.pages.SoftCoGlobalSearchPage;
 import com.pages.SoftCoLoginPage;
 
-public class TC002ediatble extends TestTemplate{
+public class TestMissingClient extends TestTemplate{
 	
-	private static final Logger LOG = Logger.getLogger(TC002ediatble.class);
+	private static final Logger LOG = Logger.getLogger(TestMissingClient.class);
 	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
 	public void ValidateMissingClient(Hashtable<String, String> data) throws Exception
 	{

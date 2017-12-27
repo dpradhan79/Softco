@@ -159,11 +159,17 @@ public class SoftCoInvoicePage extends PageTemplate {
 		//print all the options available in Row
 		List<String> headerDetails = new ArrayList<String>();
 		String postingRowHeaders = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "PostingRowHeader");
+		String RecordsInPostingRow = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "RecordsInPostingRow");
 		
     	List<WebElement> headersAvailable = this.driver.findElements(By.xpath(postingRowHeaders));
     	LOG.info("Total columns available are " + headersAvailable.size());
     	
-    	for(int i=1;i<headersAvailable.size();i++){
+    	int recordsPresent = this.driver.findElements(By.xpath(RecordsInPostingRow)).size();
+    	LOG.info("Total records present in posting Row are " + recordsPresent);
+    	if(recordsPresent>0)
+    	{
+    	for(int i=1;i<headersAvailable.size();i++)
+    	{
     		WebElement horizontal_scroll = this.driver.findElement(By.xpath("(//div[contains(@class,'table-header-wrap')])[2]//td["+(i+1)+"]")); 
         	((JavascriptExecutor) this.driver).executeScript("arguments[0].scrollIntoView(true);", horizontal_scroll);
         	
@@ -184,6 +190,18 @@ public class SoftCoInvoicePage extends PageTemplate {
     			LOG.info("Input field " + headersAvailable.get(i).getText() + " is enabled");
     		}
     	}
+    	}
+    	else
+    	{
+    		for(int i=1;i<headersAvailable.size();i++)
+    		{
+        		WebElement horizontal_scroll = this.driver.findElement(By.xpath("(//div[contains(@class,'table-header-wrap')])[2]//td["+(i+1)+"]")); 
+            	((JavascriptExecutor) this.driver).executeScript("arguments[0].scrollIntoView(true);", horizontal_scroll);
+            	
+            	LOG.info("Column " + i + " title is " + headersAvailable.get(i).getText());
+    		}
+    		LOG.info("No Records Present in Posting Row");
+    	}
 		return headerDetails;
 	}
 	
@@ -191,7 +209,8 @@ public class SoftCoInvoicePage extends PageTemplate {
 	{
 		String splitter = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "splitter");
 		String divisionInputFiels = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "document_default_divisionInputField");
-		
+		String RecordsInPostingRow = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "RecordsInPostingRow");
+    	
 		this.addButtonVisibility(isEditable);
 		this.emailTemplateValidation();
 		this.validateAllFieldsInHeader();
@@ -200,10 +219,17 @@ public class SoftCoInvoicePage extends PageTemplate {
 		this.dragAndDrop(By.xpath(splitter), By.xpath(divisionInputFiels));
 		
 		this.validateHeadersAvailableInPostingRow();
-		
+    	int recordsPresent = this.driver.findElements(By.xpath(RecordsInPostingRow)).size();
+    	if(recordsPresent>0)
+    	{
 		String firstRowCheckBox = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "firstRowCheckBox");
 		this.checkCheckBox(By.xpath(firstRowCheckBox));
 		this.validateCRUDOptionsPresentForASelectedRow();
+    	}
+    	else
+    	{
+    		LOG.info("No Records Present in Posting Row");
+    	}
 	}
 	
 	private void validateCRUDOptionsPresentForASelectedRow() throws Exception
