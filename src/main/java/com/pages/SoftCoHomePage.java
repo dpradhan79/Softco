@@ -171,4 +171,26 @@ public class SoftCoHomePage extends PageTemplate {
 		}
 		return isSuccess;
 	}
+	
+	private boolean navigateToSearchForInvoice() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.expandARInvoice();
+			this.expandARProcessingQueue();
+			this.expandARGlobalSearch();
+			
+			String bySearchforAnInvoice = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoice_searchForAnInvoice");
+			this.Click(By.xpath(bySearchforAnInvoice));
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
 }
