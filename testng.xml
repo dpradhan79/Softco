@@ -10,7 +10,7 @@
     	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
         <classes>
        		<class name="tests.TestMissingClient" />
-       		<class name="tests.TestMissingClient" />            		
+       		<class name="tests.TestMissingClient" />       		
         </classes>
     </test>
    
