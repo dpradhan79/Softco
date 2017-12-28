@@ -209,7 +209,7 @@ public class SoftCoInvoicePage extends PageTemplate {
     		try
     		{
     			Assert.assertNotNull(attribute);
-    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is diabled");
+    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is disabled");
     		}
     		catch(AssertionError a)
     		{
