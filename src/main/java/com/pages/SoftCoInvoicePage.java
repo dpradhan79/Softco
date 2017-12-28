@@ -21,7 +21,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		
 	}	
 	
-	private boolean addButtonVisibility(String isEditable)
+	private boolean addButtonVisibility(String isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -33,16 +33,26 @@ public class SoftCoInvoicePage extends PageTemplate {
 			if(isEditable.equalsIgnoreCase("yes"))
 			{
 				if(addButtonStatus)
+				{
 					LOG.info("Add button Displayed");
+				}
 				else
+				{
 					LOG.error("Add button not displayed");
+					throw new Exception("Add button not Displayed");
+				}
 			}
 			else if(isEditable.equalsIgnoreCase("No"))
 			{
 				if(addButtonStatus)
+				{
 					LOG.error("Add button Displayed");
+					throw new Exception("Add button Displayed");
+				}
 				else
+				{
 					LOG.info("Add button not displayed");
+				}
 			}
 			isSuccess = true;
 		}
@@ -82,7 +92,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	private boolean validateAllFieldsInHeader(String isEditable)
+	private boolean validateAllFieldsInHeader(String isEditable) throws Exception
 	{
 		boolean isSuccess = false;
 		try
@@ -108,6 +118,7 @@ public class SoftCoInvoicePage extends PageTemplate {
         		{
         			Assert.assertNotNull(attribute);
         			LOG.error("Input field " + inputFieldLables.get(i).getText() + " is diabled");
+        			throw new Exception("Input field " + inputFieldLables.get(i).getText() + " is diabled");
         		}
         		catch(AssertionError a)
         		{
@@ -124,6 +135,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 	    		catch(AssertionError a)
 	    		{
 	    			LOG.error("Input field " + inputFieldLables.get(i).getText() + " is enabled");
+	    			throw new Exception("Input field " + inputFieldLables.get(i).getText() + " is enabled");
 	    		}
     		}
     		isSuccess = true;
@@ -166,7 +178,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 	    		catch(AssertionError a)
 	    		{
 	    			LOG.error("Adding comment is enabled");
-	    			this.Click(By.xpath(addCommentPopUpCloseIcon));
+	    			throw new Exception("Adding comment is enabled");
 	    		}
 			}
 			isSuccess = true;
@@ -180,7 +192,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	private List<String> validateHeadersAvailableInPostingRow()
+	private List<String> validateHeadersAvailableInPostingRow(String isEditable) throws Exception
 	{
 		//print all the options available in Row
 		List<String> headerDetails = new ArrayList<String>();
@@ -206,14 +218,32 @@ public class SoftCoInvoicePage extends PageTemplate {
     		
         	String attribute = driver.findElement(By.xpath("//div[contains(@class,'scrollable v-table')]//tr[@class='v-table-row']/td["+(i+1)+"]//input")).getAttribute("readonly");
     		LOG.info("Read Only Attribute value of " + headersAvailable.get(i).getText() + " " + attribute);
-    		try
+    		
+    		if(isEditable.equalsIgnoreCase("Yes"))
     		{
-    			Assert.assertNotNull(attribute);
-    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is disabled");
+	    		try
+	    		{
+	    			Assert.assertNotNull(attribute);
+	    			LOG.error("Input field " + headersAvailable.get(i).getText() + " is disabled");
+	    			throw new Exception("Input field " + headersAvailable.get(i).getText() + " is disabled");
+	    		}
+	    		catch(AssertionError a)
+	    		{
+	    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is enabled");
+	    		}
     		}
-    		catch(AssertionError a)
+    		else if(isEditable.equalsIgnoreCase("No"))
     		{
-    			LOG.info("Input field " + headersAvailable.get(i).getText() + " is enabled");
+    			try
+        		{
+        			Assert.assertNotNull(attribute);
+        			LOG.info("Input field " + headersAvailable.get(i).getText() + " is disabled");
+        		}
+        		catch(AssertionError a)
+        		{
+        			LOG.error("Input field " + headersAvailable.get(i).getText() + " is enabled");
+        			throw new Exception("Input field " + headersAvailable.get(i).getText() + " is enabled");
+        		}
     		}
     	}
     	}
@@ -244,7 +274,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		
 		this.dragAndDrop(By.xpath(splitter), By.xpath(divisionInputFiels));
 		
-		this.validateHeadersAvailableInPostingRow();
+		this.validateHeadersAvailableInPostingRow(isEditable);
     	int recordsPresent = this.driver.findElements(By.xpath(RecordsInPostingRow)).size();
     	if(recordsPresent>0)
     	{

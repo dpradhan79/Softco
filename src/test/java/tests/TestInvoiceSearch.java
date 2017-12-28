@@ -11,7 +11,7 @@ import com.pages.SoftCoLoginPage;
 public class TestInvoiceSearch extends TestTemplate{
 	
 	private static final Logger LOG = Logger.getLogger(TestInvoiceSearch.class);
-	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
+	@Test(dataProvider = "getDataFromExcel", groups = {"ARProcessingQueue", "ARGlobalSearch"})
 	public void validateInvoiceSearch(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");

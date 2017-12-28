@@ -94,7 +94,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			LOG.info("No records displayed in search results");
 		else
 		//click on the first record displayed
-			results.get(1).click();
+			results.get(0).click();
 		LOG.info("clicked on first available record");
 	}
 	catch(Exception ex)
