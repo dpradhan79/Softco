@@ -11,8 +11,8 @@ import com.pages.SoftCoLoginPage;
 public class TestMissingClient extends TestTemplate{
 	
 	private static final Logger LOG = Logger.getLogger(TestMissingClient.class);
-	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
-	public void ValidateMissingClient(Hashtable<String, String> data) throws Exception
+	@Test(dataProvider = "getDataFromExcel", groups = {"ARProcessingQueue"})
+	public void validateMissingClient(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");
@@ -32,7 +32,6 @@ public class TestMissingClient extends TestTemplate{
 		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
 		searchPage.validateMissingClient(isEditable);
 		
-		loginPage.logout();
 	}
 
 }

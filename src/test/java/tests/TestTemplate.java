@@ -1,6 +1,8 @@
 package tests;
 
 import java.io.File;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -8,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,11 +21,13 @@ import org.testng.annotations.DataProvider;
 
 import com.excel.Xls_Reader;
 import com.google.common.io.Resources;
+import com.pages.SoftCoLoginPage;
 import com.utilities.ReusableLibs;
 import com.utilities.TestUtil;
 
 public class TestTemplate {
 	
+	private static final Logger LOG = Logger.getLogger(TestTemplate.class);
 	protected WebDriver webDriver = null;
 	protected String ChromeDriverExe = null;
 	protected String url = null;
@@ -41,8 +46,10 @@ public class TestTemplate {
 	}
 	
 	@BeforeMethod
-	public void BeforeTest(ITestContext testContext) throws URISyntaxException
+	public void beforeMethod(ITestContext testContext, Method m) throws URISyntaxException
 	{
+		LOG.info(String.format("Test Method To Be Executed Next -  %s", m.getName()));	
+		
 		ReusableLibs reUsableLib = new ReusableLibs();
 		
 		//Use APPURL if provided in Test Suite XML
@@ -92,8 +99,10 @@ public class TestTemplate {
 	}
 	
 	@AfterMethod
-	public void AfterTest(ITestContext testContext)
+	public void afterMethod(ITestContext testContext, Method m) throws Exception
 	{
+		LOG.info(String.format("Test Method Execution Completed For -  %s", m.getName()));	
+		new SoftCoLoginPage(this.webDriver).logout();
 		this.webDriver.close();
 		this.webDriver.quit();
 	}

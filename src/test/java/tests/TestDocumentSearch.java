@@ -11,8 +11,8 @@ import com.pages.SoftCoLoginPage;
 public class TestDocumentSearch extends TestTemplate{
 	
 	private static final Logger LOG = Logger.getLogger(TestDocumentSearch.class);
-	@Test(dataProvider = "getDataFromExcel", groups = {"ARGlobalSearch"})
-	public void ValidateDocumentSearch(Hashtable<String, String> data) throws Exception
+	@Test(dataProvider = "getDataFromExcel", groups = {"ARProcessingQueue", "ARGlobalSearch"})
+	public void validateDocumentSearch(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");
@@ -26,13 +26,12 @@ public class TestDocumentSearch extends TestTemplate{
 		}
 		else
 		{
-			LOG.error(String.format("Login Not Successful for user - %s", userName));
+			LOG.error(String.format("Login Not Successful for user - %s", userName));			
 		}
 		
 		SoftCoGlobalSearchPage searchPage = new SoftCoGlobalSearchPage(this.webDriver);
 		searchPage.validateSearchForDocument(isAddButtonVisisble);
-		
-		loginPage.logout();
+				
 	}
 
 }

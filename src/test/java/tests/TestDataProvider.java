@@ -24,7 +24,7 @@ public class TestDataProvider {
 	}
 	
 	@Test(dataProvider = "getDataFromExcel")
-	public void ValidateDataProvider(Hashtable<String, String> data)
+	public void validateDataProvider(Hashtable<String, String> data)
 	{
 		System.out.println();
 	}

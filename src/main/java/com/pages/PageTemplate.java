@@ -18,12 +18,15 @@ public abstract class PageTemplate {
 	private static final Logger LOG = Logger.getLogger(PageTemplate.class);
 	protected WebDriver driver = null;
 	protected ReusableLibs reUsableLib = null;
-	
+	protected int implicitWaitInSecs = 0;
+	protected int pageLoadTimeOutInSecs = 0;
 	protected PageTemplate(WebDriver webDriver)
 	{
 		this.driver = webDriver;
 		this.reUsableLib = new ReusableLibs();
-	}
+		this.implicitWaitInSecs = Integer.parseInt(reUsableLib.getConfigProperty("ImplicitWaitInSecs"));
+		this.pageLoadTimeOutInSecs = Integer.parseInt(reUsableLib.getConfigProperty("PageLoadTimeOutInSecs"));
+	}	
 	
 	protected void SendKeys(By byLocator, String text) throws Exception
 	{
@@ -79,7 +82,7 @@ public abstract class PageTemplate {
 	{
 		try
 		{
-			WebDriverWait wait = new WebDriverWait(driver, 20);
+			WebDriverWait wait = new WebDriverWait(driver, this.implicitWaitInSecs);
 			String byLoginButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LoginButton");
 			//Click on logout
 			String logoutButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "LogoutButton");
@@ -107,7 +110,7 @@ public abstract class PageTemplate {
 		}
 		catch(Exception ex)
 		{
-			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			LOG.error(String.format("Exception Encountered While Logging Out - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
 			throw ex;
 		}
 	}
@@ -117,12 +120,30 @@ public abstract class PageTemplate {
 	{
 		boolean isSuccess = false;
 		try
+		{		
+			WebDriverWait wait = new WebDriverWait(this.driver,this.implicitWaitInSecs);
+			wait.until(ExpectedConditions.elementToBeClickable(byLocator));
+			LOG.info(String.format("Element clickable - (By - %s)", byLocator));
+			isSuccess = true;
+		}
+		catch(Exception ex)
 		{
-		String timeout = reUsableLib.getConfigProperty("PageLoadTimeOutInSecs");
-		WebDriverWait wait = new WebDriverWait(this.driver,Long.valueOf(timeout).longValue());
-		wait.until(ExpectedConditions.elementToBeClickable(byLocator));
-		LOG.info(String.format("Element clickable - (By - %s)", byLocator));
-		isSuccess = true;
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	protected boolean waitUntilElementIsVisible(By byLocator)
+	{
+		boolean isSuccess = false;
+		try
+		{		
+			WebDriverWait wait = new WebDriverWait(this.driver,this.implicitWaitInSecs);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
+			LOG.info(String.format("Element clickable - (By - %s)", byLocator));
+			isSuccess = true;
 		}
 		catch(Exception ex)
 		{
@@ -140,20 +161,16 @@ public abstract class PageTemplate {
 		{
 			//validate element is displayed or not
 			implicitwait(2);
-			Assert.assertEquals(driver.findElements(byLocator).size(), 1);
+			Assert.assertEquals(driver.findElements(byLocator).size() > 0, true);
 			LOG.info(String.format("Element displayed - (By - %s)", byLocator));
 			isSuccess = true;
 		}
-		catch(Exception ex)
+		catch(Exception | AssertionError ex)
 		{
 			LOG.info(String.format("Element not displayed - (By - %s)", byLocator));
 			isSuccess = false;
 		}
-		catch(AssertionError ae)
-		{
-			LOG.info(String.format("Element not displayed - (By - %s)", byLocator));
-			isSuccess = false;
-		}
+		
 		return isSuccess;
 	}
 	
