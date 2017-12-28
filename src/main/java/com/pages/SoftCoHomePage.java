@@ -172,7 +172,7 @@ public class SoftCoHomePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	private boolean navigateToSearchForInvoice() throws Exception
+	protected boolean navigateToSearchForInvoice() throws Exception
 	{
 		boolean isSuccess = false;
 		try
