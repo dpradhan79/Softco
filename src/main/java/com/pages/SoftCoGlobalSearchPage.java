@@ -36,7 +36,7 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 			this.waitUntilElementIsClickable(By.xpath(searchButton));
 			this.Click(By.xpath(searchButton));
 			
-			//wait until search criteria button enables so that searc results dispalyed completely
+			//wait until search criteria button enables so that search results displayed completely
 			this.waitUntilElementIsClickable(By.xpath(searchCriteriaButton));
 			
 			//click on first available record in search results
