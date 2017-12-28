@@ -106,6 +106,36 @@ public class SoftCoGlobalSearchPage extends PageTemplate {
 	return isSuccess;
 	}
 	
-	
+	public boolean validateSearchForAnInvoice(String isEditable) throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{		
+			//Navigate to search for a document page
+			homePageObj.navigateToSearchForInvoice();
+			
+			//wait until search button is clickable and click on search button
+			this.waitUntilElementIsClickable(By.xpath(searchButton));
+			this.Click(By.xpath(searchButton));
+			
+			//wait until search criteria button enables so that search results displayed completely
+			this.waitUntilElementIsClickable(By.xpath(searchCriteriaButton));
+			
+			//click on first available record in search results
+			this.clickOnFirstAvailableRecordInSearchResults();
+						
+			invoicePageObj.validateInvoicePage(isEditable);
+			this.Click(By.xpath(invoice));
+			invoicePageObj.acceptUnSavedChangesPopUp();
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
 	
 }

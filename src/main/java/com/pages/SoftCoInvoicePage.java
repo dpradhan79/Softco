@@ -82,7 +82,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		return isSuccess;
 	}
 	
-	private boolean validateAllFieldsInHeader()
+	private boolean validateAllFieldsInHeader(String isEditable)
 	{
 		boolean isSuccess = false;
 		try
@@ -102,14 +102,29 @@ public class SoftCoInvoicePage extends PageTemplate {
     	{
     		String attribute = inputFields.get(i).getAttribute("readonly");
     		LOG.info("Read Only Attribute value of " + inputFieldLables.get(i).getText() + " is " + attribute);
-    		try
+    		if(isEditable.equalsIgnoreCase("yes"))
     		{
-    			Assert.assertNotNull(attribute);
-    			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is diabled");
+    			try
+        		{
+        			Assert.assertNotNull(attribute);
+        			LOG.error("Input field " + inputFieldLables.get(i).getText() + " is diabled");
+        		}
+        		catch(AssertionError a)
+        		{
+        			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is enabled");
+        		}
     		}
-    		catch(AssertionError a)
+    		else if(isEditable.equalsIgnoreCase("No"))
     		{
-    			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is enabled");
+	    		try
+	    		{
+	    			Assert.assertNotNull(attribute);
+	    			LOG.info("Input field " + inputFieldLables.get(i).getText() + " is diabled");
+	    		}
+	    		catch(AssertionError a)
+	    		{
+	    			LOG.error("Input field " + inputFieldLables.get(i).getText() + " is enabled");
+	    		}
     		}
     		isSuccess = true;
     	}
@@ -131,17 +146,28 @@ public class SoftCoInvoicePage extends PageTemplate {
 			String commentIcon = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "CommentIcon");
 			String addCommentButton = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "AddCommentButton");
 			String addCommentPopUpCloseIcon = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "CommentpopupCloseIcon");
+			String AddCommentButtonParentTag = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "AddCommentButtonParentTag");
 			this.waitUntilElementIsClickable(By.xpath(commentIcon));
+			this.Click(By.xpath(commentIcon));
 			if(isEditable.equalsIgnoreCase("yes"))
 			{
-				this.Click(By.xpath(commentIcon));
 				this.waitUntilElementIsClickable(By.xpath(addCommentButton));
 				this.waitUntilElementIsClickable(By.xpath(addCommentPopUpCloseIcon));
 				this.Click(By.xpath(addCommentPopUpCloseIcon));
 			}
 			else if(isEditable.equalsIgnoreCase("No"))
 			{
-				LOG.info("Adding comment is disabled for current logged in user");
+				try
+	    		{
+	    			Assert.assertNotNull(this.getAttribute(By.xpath(AddCommentButtonParentTag), "aria-disabled"));
+	    			LOG.info("Adding comment is disabled for current logged in user");
+	    			this.Click(By.xpath(addCommentPopUpCloseIcon));
+	    		}
+	    		catch(AssertionError a)
+	    		{
+	    			LOG.error("Adding comment is enabled");
+	    			this.Click(By.xpath(addCommentPopUpCloseIcon));
+	    		}
 			}
 			isSuccess = true;
 		}
@@ -213,7 +239,7 @@ public class SoftCoInvoicePage extends PageTemplate {
     	
 		this.addButtonVisibility(isEditable);
 		this.emailTemplateValidation();
-		this.validateAllFieldsInHeader();
+		this.validateAllFieldsInHeader(isEditable);
 		this.isPossibleToAddComment(isEditable);
 		
 		this.dragAndDrop(By.xpath(splitter), By.xpath(divisionInputFiels));
