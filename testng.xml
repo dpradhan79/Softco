@@ -10,7 +10,10 @@
     	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
         <classes>
        		<class name="tests.TestMissingClient" />
-       		<class name="tests.TestMissingClient" />       		
+       		<class name="tests.TestDocumentSearch" />
+       		<class name="tests.TestInvoiceSearch" />
+       		<class name="tests.TestTimeSheetSearch" />
+       		<class name="tests.TestCarRentalSearch" />       		
         </classes>
     </test>
    
