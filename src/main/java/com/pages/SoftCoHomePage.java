@@ -8,6 +8,11 @@ import com.config.IConstants;
 
 public class SoftCoHomePage extends PageTemplate {
 	private static final Logger LOG = Logger.getLogger(SoftCoHomePage.class);
+	
+	String bySearchforATimeSheet = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoice_searchForATimeSheet");
+	String bySearchforAnExpences = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchForExpences");
+	String bySearchforCarRental = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchCarRental");
+	
 	public SoftCoHomePage(WebDriver webDriver) {
 		super(webDriver);
 		
@@ -133,9 +138,7 @@ public class SoftCoHomePage extends PageTemplate {
 		boolean isSuccess = false;
 		try
 		{
-			this.expandARInvoice();
-			this.expandARProcessingQueue();
-			this.expandARGlobalSearch();
+			this.navigateToGlobalSearch();
 			
 			String bySearchforADocument = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoice_SearchForADocument");
 			this.Click(By.xpath(bySearchforADocument));
@@ -177,12 +180,69 @@ public class SoftCoHomePage extends PageTemplate {
 		boolean isSuccess = false;
 		try
 		{
-			this.expandARInvoice();
-			this.expandARProcessingQueue();
-			this.expandARGlobalSearch();
+			this.navigateToGlobalSearch();
 			
 			String bySearchforAnInvoice = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "ARInvoice_searchForAnInvoice");
 			this.Click(By.xpath(bySearchforAnInvoice));
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	protected boolean navigateToSearchForATimeSheet() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.navigateToGlobalSearch();
+			
+			this.Click(By.xpath(bySearchforATimeSheet));
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	private boolean navigateToGlobalSearch() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.expandARInvoice();
+			this.expandARProcessingQueue();
+			this.expandARGlobalSearch();
+			this.implicitwait(3);
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	protected boolean navigateToSearchCarRental() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.navigateToGlobalSearch();
+			this.checkCheckBox(By.xpath(bySearchforAnExpences));
+			this.Click(By.xpath(bySearchforCarRental));
+			this.implicitwait(3);
 			isSuccess = true;
 		}
 		catch(Exception ex)
