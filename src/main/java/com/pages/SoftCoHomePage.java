@@ -240,9 +240,53 @@ public class SoftCoHomePage extends PageTemplate {
 		try
 		{
 			this.navigateToGlobalSearch();
-			this.checkCheckBox(By.xpath(bySearchforAnExpences));
+			this.expandSearchForAnExpence();
 			this.Click(By.xpath(bySearchforCarRental));
 			this.implicitwait(3);
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	private boolean expandSearchForAnExpence() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.implicitwait(3);
+			String className = this.getAttribute(By.xpath(bySearchforAnExpences), "class");
+			
+			
+			
+			//Validating whether the ICON is in expand / collapse status 
+			boolean status = false;
+			if(className.contains("closed"))
+			{
+				status = false;	
+				
+			}
+			else if(className.contains("open"))
+			{
+				status = true;
+			}
+			
+			if(status)
+			{
+				LOG.info(String.format("Search for an Expence- (By - %s)", bySearchforAnExpences));
+				this.implicitwait(2);
+			}
+			else
+			{
+				this.waitUntilElementIsClickable(By.xpath(bySearchforAnExpences));
+				this.Click(By.xpath(bySearchforAnExpences));
+				this.implicitwait(2);
+			}
 			isSuccess = true;
 		}
 		catch(Exception ex)
