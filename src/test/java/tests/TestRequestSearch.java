@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 import com.pages.SoftCoGlobalSearchPage;
 import com.pages.SoftCoLoginPage;
 
-public class TestCarRentalSearch extends TestTemplate{
+public class TestRequestSearch extends TestTemplate{
 	
-	private static final Logger LOG = Logger.getLogger(TestCarRentalSearch.class);
+	private static final Logger LOG = Logger.getLogger(TestRequestSearch.class);
 	@Test(dataProvider = "getDataFromExcel", groups = {"ARProcessingQueue", "ARGlobalSearch"})
-	public void validateCarRentalSearch(Hashtable<String, String> data) throws Exception
+	public void validateRequestSearch(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");

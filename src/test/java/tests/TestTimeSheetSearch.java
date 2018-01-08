@@ -12,7 +12,7 @@ public class TestTimeSheetSearch extends TestTemplate{
 	
 	private static final Logger LOG = Logger.getLogger(TestTimeSheetSearch.class);
 	@Test(dataProvider = "getDataFromExcel", groups = {"ARProcessingQueue", "ARGlobalSearch"})
-	public void validateInvoiceSearch(Hashtable<String, String> data) throws Exception
+	public void validateTimeSheetSearch(Hashtable<String, String> data) throws Exception
 	{
 		String userName = data.get("UserName");
 		String password = data.get("Password");
