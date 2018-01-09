@@ -308,6 +308,7 @@ public class SoftCoInvoicePage extends PageTemplate {
 		if(elementStatus)
 		{
 			this.Click(By.xpath(OkButtonUnSavedChangesPopUp));
+			this.implicitwait(3);
 		}
 		else
 		{
