@@ -14,6 +14,7 @@ public class SoftCoHomePage extends PageTemplate {
 	String bySearchforCarRental = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchCarRental");
 	String bySearchforRequestIt = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchforarequestit");
 	String bySearchforHotel = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchforaHotel");
+	String bySearchforAirFare = this.reUsableLib.getElementLocator(IConstants.LOCATORSFILENAME, "searchforaAirFare");
 	
 	public SoftCoHomePage(WebDriver webDriver) {
 		super(webDriver);
@@ -264,6 +265,26 @@ public class SoftCoHomePage extends PageTemplate {
 			this.navigateToGlobalSearch();
 			this.expandSearchForAnExpence();
 			this.Click(By.xpath(bySearchforHotel));
+			this.implicitwait(3);
+			isSuccess = true;
+		}
+		catch(Exception ex)
+		{
+			isSuccess = false;
+			LOG.error(String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
+			throw ex;
+		}
+		return isSuccess;
+	}
+	
+	protected boolean navigateToSearchAirfare() throws Exception
+	{
+		boolean isSuccess = false;
+		try
+		{
+			this.navigateToGlobalSearch();
+			this.expandSearchForAnExpence();
+			this.Click(By.xpath(bySearchforAirFare));
 			this.implicitwait(3);
 			isSuccess = true;
 		}

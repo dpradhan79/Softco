@@ -13,7 +13,10 @@
        		<class name="tests.TestDocumentSearch" />
        		<class name="tests.TestInvoiceSearch" />
        		<class name="tests.TestTimeSheetSearch" />
-       		<class name="tests.TestCarRentalSearch" />       		
+       		<class name="tests.TestCarRentalSearch" />
+       		<class name="tests.TestAirfareSearch" />
+       		<class name="tests.TestHotelSearch" />
+       		<class name="tests.TestRequestSearch" />       		
         </classes>
     </test>
    
