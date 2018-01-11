@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name = "SoftCoTests" parallel="tests" thread-count="5" preserve-order="true">
+<suite name = "SoftCoTests" parallel = "tests" thread-count="5">
 	<listeners>
 		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>	
 		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>			
 	</listeners>
     
-    <test name="TestDocumentSearch_TESTENV">
+    <!--<test name="TestDocumentSearch_TESTENV">
     	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
         <classes>
        		<class name="tests.TestMissingClient" />
@@ -17,6 +17,18 @@
        		<class name="tests.TestAirfareSearch" />
        		<class name="tests.TestHotelSearch" />
        		<class name="tests.TestRequestSearch" />       		
+        </classes>
+    </test>-->
+    <test name="TestDocumentSearch_TESTENV1">
+    	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
+        <classes>       		
+       		<class name="tests.TestDocumentSearch" />       		     		
+        </classes>
+    </test>
+     <test name="TestDocumentSearch_TESTENV2">
+    	<parameter name="APPURL" value="https://chgtest.softco.com/softco/"/>
+        <classes>       		
+       		<class name="tests.TestInvoiceSearch" />       		     		
         </classes>
     </test>
    
